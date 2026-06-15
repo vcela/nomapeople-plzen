@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Kontaktní improvizace Plzeň | NŌMA people</title>
+<meta name="description" content="Letní série lekcí kontaktní improvizace v Plzni od NŌMA people. Každé pondělí 18–20 h v Ateliéru J7, vhodné i pro úplné začátečníky.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#884858">
+<meta name="author" content="NŌMA people">
+<link rel="canonical" href="https://nomapeople.com/plzen/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="shortcut icon" href="assets/favicon.svg">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NŌMA people">
+<meta property="og:title" content="Kontaktní improvizace Plzeň | NŌMA people">
+<meta property="og:description" content="Pohybová a taneční praxe založená na vnímání těla, gravitace, doteku a pohybu ve dvojici i ve skupině. Letní série lekcí v Plzni.">
+<meta property="og:url" content="https://nomapeople.com/plzen/">
+<meta property="og:image" content="https://nomapeople.com/plzen/assets/share-image.png?v=20260615">
+<meta property="og:image:secure_url" content="https://nomapeople.com/plzen/assets/share-image.png?v=20260615">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kontaktní improvizace Plzeň od NŌMA people">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kontaktní improvizace Plzeň | NŌMA people">
+<meta name="twitter:description" content="Letní série lekcí kontaktní improvizace v Plzni. Vhodné i pro začátečníky, každé pondělí v Ateliéru J7.">
+<meta name="twitter:image" content="https://nomapeople.com/plzen/assets/share-image.png?v=20260615">
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --shell-max-width:1180px;
+    --page-side:clamp(18px,4vw,24px);
+    --header-h-desktop:82px;
+    --header-h-mobile:72px;
+    --bottom-nav-h:78px;
+    --nav-glass:rgba(236,229,216,0.82);
+    --nav-shadow:0 18px 38px -24px rgba(42,35,32,0.45);
+  }
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Public Sans',sans-serif; background:#ece5d8; color:#2a2320; -webkit-font-smoothing:antialiased; overflow-x:hidden; padding-top:var(--header-h-desktop); }
+  h1,h2,h3{ font-family:'Baloo 2',cursive; }
+  a{ color:inherit; text-decoration:none; }
+  ::selection{ background:#884858; color:#f4ecc6; }
+  input,textarea,button{ font-family:inherit; }
+  @keyframes drawLine{ to{ stroke-dashoffset:0; } }
+  @keyframes marqueeX{ from{ transform:translateX(0); } to{ transform:translateX(-25%); } }
+  @keyframes blobMorph{
+    0%,100%{ border-radius:42% 58% 63% 37% / 47% 43% 57% 53%; }
+    33%{ border-radius:62% 38% 41% 59% / 56% 61% 39% 44%; }
+    66%{ border-radius:38% 62% 56% 44% / 38% 47% 53% 62%; }
+  }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-16px) rotate(3deg); } }
+  @keyframes spinSlow{ to{ transform:rotate(360deg); } }
+  @keyframes revealDown{ from{ clip-path:inset(0 0 100% 0); } to{ clip-path:inset(0 0 0% 0); } }
+  html{ scroll-padding-top:calc(var(--header-h-desktop) + 18px); }
+  .site-header{ position:fixed; top:0; left:0; right:0; z-index:50; backdrop-filter:blur(12px); background:var(--nav-glass); border-bottom:1px solid rgba(136,72,88,0.16); box-shadow:var(--nav-shadow); }
+  .site-header__inner{ max-width:var(--shell-max-width); margin:0 auto; padding:14px var(--page-side); display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:var(--header-h-desktop); }
+  .site-brand{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .site-brand-badge{ font-size:11px; font-weight:700; letter-spacing:0.28em; text-transform:uppercase; color:#884858; border-left:1px solid rgba(136,72,88,0.4); padding-left:10px; }
+  .site-nav{ display:flex; align-items:center; gap:12px; font-size:14px; font-weight:600; white-space:nowrap; }
+  .nav-link,
+  .nav-cta{ display:inline-flex; font-size: 18px; font-weight:400; align-items:center; justify-content:center; border-radius:999px; transition:opacity .2s, color .2s, background .2s, transform .2s, box-shadow .2s; font-family:'Baloo 2',cursive; }
+  .nav-link{ opacity:0.78; color:#2a2320; padding:10px 14px;}
+  .nav-link:hover,
+  .nav-link:focus-visible{ opacity:1; color:#884858; background:rgba(136,72,88,0.1); outline:none; }
+  .nav-link[data-active='1']{ opacity:1; color:#884858; background:rgba(136,72,88,0.14); box-shadow:inset 0 0 0 1px rgba(136,72,88,0.18); }
+  .nav-cta{ background:#884858; color:#f4ecc6; padding:10px 20px; box-shadow:0 12px 24px -18px rgba(136,72,88,0.9); }
+  .nav-cta:hover,
+  .nav-cta:focus-visible{ background:#6f3a47; transform:translateY(-2px); outline:none; }
+  .nav-cta[data-active='1']{ background:#6f3a47; color:#f4ecc6; box-shadow:0 16px 30px -20px rgba(136,72,88,0.95); }
+  @media (max-width: 960px){
+    .hero-section,
+    .info-pack,
+    .teacher-grid,
+    .map-card{ grid-template-columns:1fr !important; }
+  }
+  @media (max-width: 767px){
+    html{ scroll-padding-top:calc(var(--header-h-mobile) + 16px); }
+    body{ padding-top:var(--header-h-mobile); padding-bottom:calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px) + 20px); }
+    .site-header{ background:transparent; border-bottom:none; box-shadow:none; backdrop-filter:none; }
+    .site-header__inner{ min-height:var(--header-h-mobile); justify-content:center; padding:12px var(--page-side); }
+    .site-header__inner{ width:calc(100% - 24px); margin:10px auto 0; background:var(--nav-glass); border:1px solid rgba(136,72,88,0.14); border-radius:20px; box-shadow:var(--nav-shadow); }
+    .site-brand img{ height:32px !important; }
+    .site-brand-badge{ font-size:10px; letter-spacing:0.18em; padding-left:8px; }
+    .site-nav{ position:fixed; left:12px; right:12px; bottom:calc(env(safe-area-inset-bottom, 0px) + 10px); z-index:70; gap:8px; padding:10px; border:1px solid rgba(136,72,88,0.16); border-radius:22px; background:rgba(244,236,198,0.92); backdrop-filter:blur(18px); box-shadow:0 26px 46px -28px rgba(42,35,32,0.7); }
+    .site-nav .nav-link,
+    .site-nav .nav-cta{ flex:1; min-width:0; padding:12px 8px; border-radius:16px; font-size:12px; line-height:1.15; }
+    .site-nav .nav-cta{ box-shadow:none; }
+    .hero-section{ padding-top:clamp(28px,8vw,42px) !important; }
+    .hero-section h1{ font-size:clamp(40px,16vw,72px) !important; }
+    .hero-section > div:last-child{ min-height:280px !important; }
+    .form-grid{ grid-template-columns:1fr !important; }
+  }
+</style>
+</helmet>
+
+<div style="position:relative; width:100%; overflow:hidden;">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#top" class="site-brand">
+        <img src="assets/noma-wordmark-wine.png" alt="NŌMA people" style="display:block; height:38px; width:auto;">
+        <span class="site-brand-badge">Plzeň</span>
+      </a>
+      <nav class="site-nav" aria-label="Hlavní menu">
+        <a href="#o-ci" data-spy="o-ci" data-active="0" class="nav-link">Co to je</a>
+        <a href="#info" data-spy="info" data-active="0" class="nav-link">Info</a>
+        <a href="#lektorka" data-spy="lektorka" data-active="0" class="nav-link">Lektorka</a>
+        <a href="#faq" data-spy="faq" data-active="0" class="nav-link">FAQ</a>
+        <a href="#prihlasit" data-spy="prihlasit" data-active="0" class="nav-cta">Přihlásit</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" class="hero-section" style="position:relative; max-width:1180px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(48px,7vw,96px); display:grid; grid-template-columns:1.05fr 0.95fr; gap:clamp(24px,4vw,56px); align-items:center;">
+    <div data-reveal>
+      <div style="display:inline-flex; align-items:center; gap:10px; font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6f3a47; background:#dfeaef; border:1px solid rgba(143,182,199,0.7); padding:8px 16px; border-radius:999px; margin-bottom:26px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:#884858; display:inline-block;"></span>
+        Letní série lekcí · 2026
+      </div>
+      <h1 style="font-size:clamp(48px,8.4vw,104px); line-height:0.9; font-weight:400; letter-spacing:-0.035em; color:#884858; text-wrap:balance;">kontaktní<br>improvizace</h1>
+      <div style="font-family:'Baloo 2',cursive; font-size:clamp(22px,3.6vw,40px); color:#6f9fb3; margin:18px 0 6px; letter-spacing:0.01em;">move. listen. connect.</div>
+      <p style="font-size:clamp(16px,1.5vw,19px); line-height:1.55; max-width:30em; color:#4a3f3a; margin-top:14px;">Pohybová a taneční praxe založená na vnímání těla, gravitace, doteku a pohybu ve dvojici i ve skupině. Bez tlaku na výkon — jen prostor objevovat.</p>
+
+      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:28px;">
+        <span style="display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:600; background:#f4ecc6; border:1px solid rgba(136,72,88,0.18); padding:9px 16px; border-radius:12px; white-space:nowrap;"><span style="width:7px; height:7px; border-radius:50%; background:#884858;"></span>každé pondělí · 18–20 h</span>
+        <span style="display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:600; background:#f4ecc6; border:1px solid rgba(136,72,88,0.18); padding:9px 16px; border-radius:12px; white-space:nowrap;"><span style="width:7px; height:7px; border-radius:50%; background:#8fb6c7;"></span>Ateliér J7, Plzeň</span>
+        <span style="display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:600; background:#f4ecc6; border:1px solid rgba(136,72,88,0.18); padding:9px 16px; border-radius:12px; white-space:nowrap;"><span style="width:7px; height:7px; border-radius:50%; background:#884858;"></span>300 Kč / lekce</span>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:14px; margin-top:32px;">
+        <a href="#prihlasit" style="background:#884858; color:#f4ecc6; font-weight:700; font-size:16px; padding:16px 32px; border-radius:999px; box-shadow:0 12px 28px -12px rgba(136,72,88,0.7);" style-hover="background:#6f3a47; transform:translateY(-2px);">Přihlásit se na lekci →</a>
+        <a href="#o-ci" style="border:1.5px solid #884858; color:#884858; font-weight:700; font-size:16px; padding:16px 30px; border-radius:999px;" style-hover="background:rgba(136,72,88,0.12); transform:translateY(-2px);">Co je kontaktka?</a>
+      </div>
+    </div>
+
+    <!-- animated line dancer -->
+    <div style="position:relative; min-height:clamp(340px,42vw,560px); display:flex; align-items:center; justify-content:center;">
+      <div style="position:absolute; width:min(86%,440px); aspect-ratio:1/1; background:#8fb6c7; opacity:0.92; animation:blobMorph 16s ease-in-out infinite;"></div>
+      <div style="position:relative; width:min(74%,330px); animation:floaty 8s ease-in-out infinite;">
+        <div id="dancerWrap" style="clip-path:inset(0 0 100% 0); animation:revealDown 2s cubic-bezier(.5,.05,.2,1) 0.4s forwards;">
+          <img src="assets/dancer.webp" alt="kresba tanečnice — kontaktní improvizace" style="display:block; width:100%; height:auto;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div style="background:#884858; padding:14px 0; overflow:hidden; border-top:1px solid rgba(244,236,198,0.18); border-bottom:1px solid rgba(244,236,198,0.18);">
+    <div style="display:flex; width:max-content; animation:marqueeX 26s linear infinite; will-change:transform;">
+      <div style="display:flex; gap:48px; padding-right:48px; font-family:'Baloo 2',cursive; font-size:30px; color:#f4ecc6; white-space:nowrap;">
+        <span>move</span><span style="color:#8fb6c7;">✺</span><span>meet</span><span style="color:#8fb6c7;">✺</span><span>melt</span><span style="color:#8fb6c7;">✺</span><span>rest</span><span style="color:#8fb6c7;">✺</span><span>connect</span><span style="color:#8fb6c7;">✺</span>
+      </div>
+      <div style="display:flex; gap:48px; padding-right:48px; font-family:'Baloo 2',cursive; font-size:30px; color:#f4ecc6; white-space:nowrap;" aria-hidden="true">
+        <span>move</span><span style="color:#8fb6c7;">✺</span><span>meet</span><span style="color:#8fb6c7;">✺</span><span>melt</span><span style="color:#8fb6c7;">✺</span><span>rest</span><span style="color:#8fb6c7;">✺</span><span>connect</span><span style="color:#8fb6c7;">✺</span>
+      </div>
+      <div style="display:flex; gap:48px; padding-right:48px; font-family:'Baloo 2',cursive; font-size:30px; color:#f4ecc6; white-space:nowrap;" aria-hidden="true">
+        <span>move</span><span style="color:#8fb6c7;">✺</span><span>meet</span><span style="color:#8fb6c7;">✺</span><span>melt</span><span style="color:#8fb6c7;">✺</span><span>rest</span><span style="color:#8fb6c7;">✺</span><span>connect</span><span style="color:#8fb6c7;">✺</span>
+      </div>
+      <div style="display:flex; gap:48px; padding-right:48px; font-family:'Baloo 2',cursive; font-size:30px; color:#f4ecc6; white-space:nowrap;" aria-hidden="true">
+        <span>move</span><span style="color:#8fb6c7;">✺</span><span>meet</span><span style="color:#8fb6c7;">✺</span><span>melt</span><span style="color:#8fb6c7;">✺</span><span>rest</span><span style="color:#8fb6c7;">✺</span><span>connect</span><span style="color:#8fb6c7;">✺</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CO JE KONTAKTNÍ IMPROVIZACE ============ -->
+  <section id="o-ci" style="background:#884858; color:#f4ecc6; padding:clamp(64px,9vw,128px) 24px; position:relative; overflow:hidden;">
+    <img src="assets/dancer.webp" alt="Kontaktní improvizace" style="position:absolute; right:-60px; bottom:-40px; height:120%; opacity:0.07; filter:invert(1); pointer-events:none;">
+    <div style="max-width:1180px; margin:0 auto; position:relative;">
+      <div data-reveal>
+        <span style="font-family:'Baloo 2',cursive; font-size:24px; color:#8fb6c7;">01 — o praxi</span>
+        <h2 style="font-size:clamp(34px,5.6vw,72px); line-height:1.0; font-weight:400; letter-spacing:-0.025em; margin:14px 0 0; text-wrap:balance;">Bezpečný prostor pro objevování pohybu</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:clamp(24px,4vw,56px); margin-top:clamp(36px,5vw,64px);">
+        <p data-reveal style="font-size:clamp(17px,1.6vw,21px); line-height:1.6; opacity:0.92;">Vytváříme prostor pro objevování pohybu <strong style="font-weight:800;">bez tlaku na výkon</strong>, technickou dokonalost nebo předem dané kroky.</p>
+        <p data-reveal style="font-size:clamp(17px,1.6vw,21px); line-height:1.6; opacity:0.92;">Rozvíjíme vnímání těla, práci s pozorností, oporou, váhou a vzájemnou komunikací <strong style="font-weight:800;">skrze pohyb</strong>.</p>
+        <p data-reveal style="font-size:clamp(17px,1.6vw,21px); line-height:1.6; opacity:0.92;">Vnímání vlastního těla, gravitace, doteku a pohybu — <strong style="font-weight:800;">ve dvojici i ve skupině</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRO KOHO ============ -->
+  <section style="background:#8fb6c7; color:#21343c; padding:clamp(56px,8vw,112px) 24px;">
+    <div style="max-width:1000px; margin:0 auto; text-align:center;">
+      <div data-reveal>
+        <span style="font-family:'Baloo 2',cursive; font-size:24px; color:#884858;">02 — pro koho</span>
+        <h2 style="font-size:clamp(30px,4.6vw,58px); line-height:1.05; font-weight:400; letter-spacing:-0.02em; margin:14px 0 22px; text-wrap:balance;">Vhodné pro začátečníky.<br>Taneční zkušenost není potřeba.</h2>
+        <p style="font-size:clamp(18px,2vw,26px); line-height:1.5; max-width:24em; margin:0 auto; font-weight:500;">Jestli umíš <em style="font-style:normal; color:#884858; font-weight:800;">chodit</em>, <em style="font-style:normal; color:#884858; font-weight:800;">padat</em> nebo se občas o někoho <em style="font-style:normal; color:#884858; font-weight:800;">opřít</em>, tak už máš skvělý základ&nbsp;;-)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRAKTICKÉ INFO ============ -->
+  <section id="info" style="padding:clamp(64px,9vw,120px) 24px; max-width:1180px; margin:0 auto;">
+    <div data-reveal style="margin-bottom:clamp(32px,4vw,52px);">
+      <span style="font-family:'Baloo 2',cursive; font-size:24px; color:#8fb6c7;">03 — kdy, kde, za kolik</span>
+      <h2 style="font-size:clamp(32px,5vw,60px); line-height:1.02; font-weight:400; letter-spacing:-0.02em; color:#884858; margin-top:12px;">Praktické info</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;">
+      <div data-reveal style="background:#884858; color:#f4ecc6; border-radius:24px; padding:30px;">
+        <div style="font-size:13px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; opacity:0.7;">Kdy</div>
+        <div style="font-size:28px; font-weight:800; margin:12px 0 6px; letter-spacing:-0.01em; line-height:1.08;">22. 6. – 31. 8. 2026</div>
+        <div style="font-size:17px; opacity:0.9;">každé pondělí · 18–20 h</div>
+      </div>
+      <a data-reveal href="https://www.google.com/maps/search/?api=1&query=Jablonsk%C3%A9ho%207%20Plze%C5%88%20Slovany" target="_blank" rel="noopener" aria-label="Otevřít Ateliér J7 v Google Maps" style="display:block; background:#8fb6c7; color:#21343c; border-radius:24px; padding:30px; transition:transform .2s, box-shadow .2s, filter .2s;" style-hover="transform:translateY(-2px); filter:brightness(1.03); box-shadow:0 16px 28px -18px rgba(42,35,32,0.35);">
+        <div style="font-size:13px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; opacity:0.65;">Kde</div>
+        <div style="font-size:28px; font-weight:800; margin:12px 0 6px; letter-spacing:-0.01em; line-height:1.08;">Ateliér J7</div>
+        <div style="font-size:17px; opacity:0.92;">Jablonského 7,<br>Plzeň 2-Slovany</div>
+      </a>
+      <div data-reveal style="background:#f4ecc6; color:#884858; border:1.5px solid rgba(136,72,88,0.22); border-radius:24px; padding:30px;">
+        <div style="font-size:13px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; opacity:0.7;">Cena</div>
+        <div style="font-size:28px; font-weight:800; margin:12px 0 6px; letter-spacing:-0.01em; line-height:1.08;">300 Kč</div>
+        <div style="font-size:17px; opacity:0.9;">za lekci · 2 hodiny pohybu</div>
+      </div>
+    </div>
+
+    <!-- co s sebou -->
+    <div data-reveal class="info-pack" style="display:grid; grid-template-columns:1.2fr 1fr; gap:clamp(24px,4vw,48px); align-items:center; margin-top:clamp(36px,5vw,64px); background:#f6efde; border:1px solid rgba(136,72,88,0.14); border-radius:28px; padding:clamp(28px,4vw,48px);">
+      <div>
+        <h3 style="font-size:clamp(22px,2.6vw,32px); font-weight:400; color:#884858; letter-spacing:-0.01em; margin-bottom:20px;">Co si vzít s sebou</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:14px;">
+          <li style="display:flex; gap:14px; align-items:flex-start; font-size:17px; line-height:1.45;"><span style="flex:none; width:26px; height:26px; border-radius:50%; background:#8fb6c7; color:#21343c; display:grid; place-items:center; font-weight:800; font-size:14px;">1</span><span>Budeme bosky nebo v ponožkách.</span></li>
+          <li style="display:flex; gap:14px; align-items:flex-start; font-size:17px; line-height:1.45;"><span style="flex:none; width:26px; height:26px; border-radius:50%; background:#8fb6c7; color:#21343c; display:grid; place-items:center; font-weight:800; font-size:14px;">2</span><span>Pohodlné oblečení, ideálně s <strong style="font-weight:700;">dlouhými rukávy a nohavicemi</strong>.</span></li>
+          <li style="display:flex; gap:14px; align-items:flex-start; font-size:17px; line-height:1.45;"><span style="flex:none; width:26px; height:26px; border-radius:50%; background:#8fb6c7; color:#21343c; display:grid; place-items:center; font-weight:800; font-size:14px;">3</span><span>Láhev vody na doplnění tekutin.</span></li>
+        </ul>
+      </div>
+      <div style="background:#884858; color:#f4ecc6; border-radius:20px; padding:28px; align-self:stretch; display:flex; flex-direction:column; justify-content:center; gap:8px;">
+        <div style="font-family:'Baloo 2',cursive; font-size:54px; line-height:1; color:#8fb6c7;">10′</div>
+        <div style="font-size:18px; font-weight:700;">Doraž 10 minut před začátkem</div>
+        <div style="font-size:15px; opacity:0.88; line-height:1.45;">Ať se můžeš pomalu naladit, protáhnout a přivítat.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEKTORKA ============ -->
+  <section id="lektorka" style="background:#f6efde; padding:clamp(56px,8vw,112px) 24px;">
+    <div class="teacher-grid" style="max-width:1040px; margin:0 auto; display:grid; grid-template-columns:0.78fr 1.22fr; gap:clamp(28px,5vw,60px); align-items:start;">
+      <div data-reveal style="position:relative; display:flex; justify-content:center; align-items:center;">
+        <div style="position:absolute; width:78%; aspect-ratio:1; background:#8fb6c7; border-radius:42% 58% 63% 37% / 47% 43% 57% 53%; transform:translate(-9%,9%); animation:blobMorph 22s ease-in-out infinite;"></div>
+        <img src="assets/dancer.webp" alt="Kontaktní improvizace" style="position:absolute; right:-2%; bottom:-6%; width:34%; height:auto; opacity:0.5; pointer-events:none;">
+        <img src="assets/maya.webp" alt="Maya — lektorka NŌMA people" style="position:relative; width:86%; aspect-ratio:2/3; object-fit:cover; object-position:center; border-radius:48% 52% 55% 45% / 52% 46% 54% 48%; animation:blobMorph 17s ease-in-out infinite reverse; box-shadow:0 28px 56px -24px rgba(42,35,32,0.55);">
+      </div>
+      <div data-reveal>
+        <span style="font-family:'Baloo 2',cursive; font-size:24px; color:#8fb6c7;">04 — kdo vede</span>
+        <h2 style="font-size:clamp(32px,4.8vw,58px); line-height:1.02; font-weight:400; letter-spacing:-0.02em; color:#884858; margin:12px 0 18px;">Lektorka Maya</h2>
+        <p style="font-size:clamp(16px,1.55vw,18px); line-height:1.64; color:#4a3f3a; margin-bottom:15px;">Ahoj, jsem tanečnice, lektorka a vizuální umělkyně, propojuji pohyb s tvorbou a estetikou :) Můj pohybový jazyk vychází ze <strong style="font-weight:700; color:#884858;">street dance</strong>, ale postupně jsem se přesunula i k contemporary, dancehallu a africkým stylům. Založila jsem dvě taneční skupiny, působila v profesionálním uskupení Dance2xs a tvořila site-specific představení, v nichž se propojovaly různé tvůrčí světy a taneční scéna mého rodného města Plzně.</p>
+        <p style="font-size:clamp(16px,1.55vw,18px); line-height:1.64; color:#4a3f3a; margin-bottom:15px;">V posledních letech se ale moje cesta víc otáčí dovnitř — <strong style="font-weight:700; color:#884858;">od výkonu k prožitku</strong>. K tělu, které se učí zpomalit, vnímat, regenerovat a hrát si. Hledám udržitelnější způsob, jak být v pohybu i v životě.</p>
+        <p style="font-size:clamp(16px,1.55vw,18px); line-height:1.64; color:#4a3f3a;">Kontaktní improvizaci jsem objevila úplnou náhodou na severu Thajska. Tam jsem se zamilovala a pokračovala své učení po asijských zemích. Nacházela různé komunity a každý svým způsobem obohatil mé vnímání kontaktní improvizace, pohybu i tance. Pořád jsem v procesu učení, a možná právě to mě na tom baví nejvíc. <strong style="font-weight:700; color:#884858;">Tak pojďme objevovat spolu :)</strong></p>
+        <a href="https://www.instagram.com/maya_cz" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; margin-top:24px; background:#884858; color:#f4ecc6; font-weight:700; padding:13px 24px; border-radius:999px;" style-hover="background:#6f3a47; transform:translateY(-2px);">
+          @maya_cz na Instagramu
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ O NŌMA PEOPLE ============ -->
+  <section style="background:#8fb6c7; color:#21343c; padding:clamp(56px,8vw,112px) 24px; position:relative; overflow:hidden;">
+    <div style="max-width:900px; margin:0 auto; text-align:center; position:relative;">
+      <div data-reveal>
+        <img src="assets/noma-wordmark-wine.png" alt="NŌMA people" style="display:block; height:64px; width:auto; margin:0 auto 26px;">
+        <p style="font-size:clamp(18px,2.1vw,26px); line-height:1.55; font-weight:500; max-width:24em; margin:0 auto;">Kontaktní improvizace Plzeň je letní odnož projektu <strong style="font-weight:800; color:#884858;">NŌMA people</strong> — komunity kolem pohybu, doteku a vzájemného propojení.</p>
+        <div style="font-family:'Baloo 2',cursive; font-size:clamp(24px,3.4vw,40px); color:#f4ecc6; margin-top:28px;">move. meet. melt.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" style="padding:clamp(64px,9vw,120px) 24px; max-width:860px; margin:0 auto;">
+    <div data-reveal style="margin-bottom:clamp(28px,4vw,44px);">
+      <span style="font-family:'Baloo 2',cursive; font-size:24px; color:#8fb6c7;">05 — časté otázky</span>
+      <h2 style="font-size:clamp(32px,5vw,60px); line-height:1.02; font-weight:400; letter-spacing:-0.02em; color:#884858; margin-top:12px;">FAQ</h2>
+    </div>
+    <div data-reveal style="display:flex; flex-direction:column; gap:12px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div style="background:#f6efde; border:1px solid rgba(136,72,88,0.16); border-radius:18px; overflow:hidden;">
+          <button onClick="{{ f.toggle }}" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; text-align:left; background:transparent; border:none; cursor:pointer; padding:20px 24px; font-size:clamp(16px,1.7vw,19px); font-weight:700; color:#884858;">
+            <span>{{ f.q }}</span>
+            <span style="flex:none; width:26px; text-align:center; font-size:28px; line-height:1; color:#884858; font-weight:400;">{{ f.icon }}</span>
+          </button>
+          <div style="max-height:{{ f.mh }}; overflow:hidden; transition:max-height 0.35s ease;">
+            <p style="padding:0 24px 22px; font-size:16px; line-height:1.6; color:#4a3f3a;">{{ f.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ MAPA ============ -->
+  <section style="padding:0 24px clamp(64px,9vw,110px); max-width:1180px; margin:0 auto;">
+    <div data-reveal class="map-card" style="background:#884858; border-radius:28px; overflow:hidden; display:grid; grid-template-columns:1fr 1fr;">
+      <div style="padding:clamp(32px,4vw,56px); color:#f4ecc6;">
+        <span style="font-family:'Baloo 2',cursive; font-size:24px; color:#8fb6c7;">06 — kudy k nám</span>
+        <h2 style="font-size:clamp(28px,3.6vw,46px); line-height:1.04; font-weight:400; letter-spacing:-0.02em; margin:12px 0 18px;">Ateliér J7</h2>
+        <p style="font-size:19px; line-height:1.5; opacity:0.92;">Jablonského 7<br>Plzeň 2-Slovany</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Jablonsk%C3%A9ho%207%20Plze%C5%88%20Slovany" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; margin-top:26px; background:#f4ecc6; color:#884858; font-weight:700; padding:13px 24px; border-radius:999px; transition:background .2s, transform .2s, box-shadow .2s;" style-hover="background:#fff; transform:translateY(-2px); box-shadow:0 12px 26px -12px rgba(0,0,0,0.45);">Otevřít v mapách →</a>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&query=Jablonsk%C3%A9ho%207%20Plze%C5%88%20Slovany" target="_blank" rel="noopener" aria-label="Otevřít Ateliér J7 v Google Maps" style="position:relative; display:block; background:#8fb6c7; min-height:280px; overflow:hidden; transition:transform .2s, filter .2s;" style-hover="filter:brightness(1.03); transform:scale(1.01);">
+        <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0; width:100%; height:100%;">
+          <rect width="400" height="320" fill="#8fb6c7"></rect>
+          <path d="M-20 90 H420 M-20 210 H420 M120 -20 V340 M280 -20 V340" stroke="#f4ecc6" stroke-width="14" opacity="0.5" fill="none"></path>
+          <path d="M-20 150 H420 M200 -20 V340" stroke="#f4ecc6" stroke-width="22" opacity="0.7" fill="none"></path>
+          <circle cx="200" cy="150" r="60" fill="none" stroke="#884858" stroke-width="2" stroke-dasharray="6 7" opacity="0.55"></circle>
+        </svg>
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-100%);">
+          <div style="width:42px; height:42px; background:#884858; border-radius:50% 50% 50% 0; transform:rotate(-45deg); box-shadow:0 8px 18px -6px rgba(0,0,0,0.5); display:grid; place-items:center;">
+            <span style="transform:rotate(45deg); color:#f4ecc6; font-weight:900; font-size:16px;">J7</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ PŘIHLÁŠENÍ ============ -->
+  <section id="prihlasit" style="background:#884858; padding:clamp(64px,9vw,128px) 24px; position:relative; overflow:hidden;">
+    <div style="position:absolute; width:520px; height:520px; background:#6f3a47; border-radius:50%; top:-200px; left:-160px; opacity:0.5;"></div>
+    <div style="max-width:720px; margin:0 auto; position:relative;">
+      <div data-reveal style="text-align:center; margin-bottom:36px;">
+        <span style="font-family:'Baloo 2',cursive; font-size:24px; color:#8fb6c7;">07 — přidej se</span>
+        <h2 style="font-size:clamp(34px,5.4vw,66px); line-height:0.98; font-weight:400; letter-spacing:-0.025em; color:#f4ecc6; margin:12px 0 14px;">Přihlas se na lekci</h2>
+        <p style="font-size:clamp(16px,1.7vw,19px); line-height:1.55; color:rgba(244,236,198,0.85); max-width:30em; margin:0 auto;">Vyplň pár údajů a ozveme se ti s potvrzením. Platba 300 Kč proběhne na místě před lekcí.</p>
+      </div>
+
+      <!-- INLINE FORM -->
+      <sc-if value="{{ showInline }}" hint-placeholder-val="{{ true }}">
+        <div data-reveal style="background:#f4ecc6; border-radius:28px; padding:clamp(26px,4vw,44px); box-shadow:0 30px 70px -30px rgba(0,0,0,0.55);">
+          <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center; padding:24px 8px;">
+              <div style="font-family:'Baloo 2',cursive; font-size:56px; color:#8fb6c7; line-height:1;">✓</div>
+              <h3 style="font-size:28px; font-weight:400; color:#884858; margin:14px 0 8px;">Díky, jsi v hře!</h3>
+              <p style="font-size:17px; line-height:1.5; color:#4a3f3a; max-width:26em; margin:0 auto;">Ozveme se ti na e-mail s potvrzením. Těšíme se na tebe v Ateliéru J7 — nezapomeň dorazit 10 minut předem.</p>
+              <button onClick="{{ resetForm }}" style="margin-top:22px; background:transparent; border:1.5px solid #884858; color:#884858; font-weight:700; padding:11px 22px; border-radius:999px; cursor:pointer;">Přihlásit dalšího</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ onSubmit }}" style="display:flex; flex-direction:column; gap:18px;">
+              <div class="form-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+                <label style="display:flex; flex-direction:column; gap:7px;">
+                  <span style="font-size:13px; font-weight:700; color:#884858; letter-spacing:0.02em;">Jméno a příjmení *</span>
+                  <input ref="{{ nameRef }}" type="text" placeholder="Jana Nováková" style="background:#fff; border:1.5px solid rgba(136,72,88,0.25); border-radius:12px; padding:13px 15px; font-size:16px; color:#2a2320; outline:none;" style-focus="border-color:#884858;">
+                </label>
+                <label style="display:flex; flex-direction:column; gap:7px;">
+                  <span style="font-size:13px; font-weight:700; color:#884858; letter-spacing:0.02em;">Telefon</span>
+                  <input ref="{{ phoneRef }}" type="tel" placeholder="+420 …" style="background:#fff; border:1.5px solid rgba(136,72,88,0.25); border-radius:12px; padding:13px 15px; font-size:16px; color:#2a2320; outline:none;" style-focus="border-color:#884858;">
+                </label>
+              </div>
+              <label style="display:flex; flex-direction:column; gap:7px;">
+                <span style="font-size:13px; font-weight:700; color:#884858; letter-spacing:0.02em;">E-mail *</span>
+                <input ref="{{ emailRef }}" type="email" placeholder="jana@email.cz" style="background:#fff; border:1.5px solid rgba(136,72,88,0.25); border-radius:12px; padding:13px 15px; font-size:16px; color:#2a2320; outline:none;" style-focus="border-color:#884858;">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:7px;">
+                <span style="font-size:13px; font-weight:700; color:#884858; letter-spacing:0.02em;">Poznámka</span>
+                <textarea ref="{{ noteRef }}" rows="3" placeholder="Cokoliv nám chceš dát vědět (termín, zkušenosti…)" style="background:#fff; border:1.5px solid rgba(136,72,88,0.25); border-radius:12px; padding:13px 15px; font-size:16px; color:#2a2320; outline:none; resize:vertical;" style-focus="border-color:#884858;"></textarea>
+              </label>
+
+              <label style="display:flex; gap:12px; align-items:flex-start; cursor:pointer; background:#fff; border:1.5px solid rgba(136,72,88,0.2); border-radius:14px; padding:14px 16px;">
+                <input ref="{{ gdprRef }}" type="checkbox" style="flex:none; width:20px; height:20px; margin-top:2px; accent-color:#884858;">
+                <span style="font-size:13px; line-height:1.5; color:#4a3f3a;"><strong style="color:#884858;">Souhlas se zpracováním údajů *</strong> — souhlasím se zpracováním osobních údajů (jméno, e-mail, telefon) správcem NŌMA People pro účely registrace a organizační komunikace. Údaje uchováváme max. 6 měsíců od akce a nesdílíme je mimo nezbytné služby. Souhlas lze kdykoli odvolat.</span>
+              </label>
+              <label style="display:flex; gap:12px; align-items:flex-start; cursor:pointer; background:#fff; border:1.5px solid rgba(136,72,88,0.2); border-radius:14px; padding:14px 16px;">
+                <input ref="{{ photoRef }}" type="checkbox" style="flex:none; width:20px; height:20px; margin-top:2px; accent-color:#884858;">
+                <span style="font-size:13px; line-height:1.5; color:#4a3f3a;"><strong style="color:#884858;">Souhlas s foto/video</strong> — souhlasím s pořízením a užitím atmosférických foto/video záběrů z akce pro komunikaci NŌMA. Vím, že mohu u vstupu požádat o označení „NO PHOTO" a o odstranění své podoby.</span>
+              </label>
+
+              <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
+                <div style="background:#fbe3e3; color:#9a2b2b; border-radius:12px; padding:12px 16px; font-size:14px; font-weight:600;">{{ formError }}</div>
+              </sc-if>
+
+              <button type="submit" style="background:#884858; color:#f4ecc6; font-weight:800; font-size:17px; padding:17px; border:none; border-radius:999px; cursor:pointer; margin-top:4px; transition:background .2s, transform .2s, box-shadow .2s;" style-hover="background:#6f3a47; transform:translateY(-2px); box-shadow:0 14px 30px -14px rgba(42,35,32,0.6);">Odeslat přihlášku →</button>
+              <p style="font-size:12px; text-align:center; color:rgba(74,63,58,0.7);">* povinné pole</p>
+            </form>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- GOOGLE FORM MODE -->
+      <sc-if value="{{ showGoogle }}" hint-placeholder-val="{{ false }}">
+        <div data-reveal style="background:#f4ecc6; border-radius:28px; padding:clamp(32px,5vw,52px); text-align:center; box-shadow:0 30px 70px -30px rgba(0,0,0,0.55);">
+          <div style="font-family:'Baloo 2',cursive; font-size:48px; color:#8fb6c7; line-height:1;">↗</div>
+          <h3 style="font-size:26px; font-weight:400; color:#884858; margin:12px 0 10px;">Přihlášení přes formulář</h3>
+          <p style="font-size:16px; line-height:1.55; color:#4a3f3a; max-width:26em; margin:0 auto 26px;">Klikni na tlačítko a vyplň krátký přihlašovací formulář. Otevře se v novém okně.</p>
+          <a href="{{ googleUrl }}" target="_blank" rel="noopener" style="display:inline-block; background:#884858; color:#f4ecc6; font-weight:800; font-size:17px; padding:17px 36px; border-radius:999px;" style-hover="background:#6f3a47;">Otevřít přihlašovací formulář →</a>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#2a2320; color:#f4ecc6; padding:clamp(48px,6vw,80px) 24px 40px;">
+    <div style="max-width:1180px; margin:0 auto; display:flex; flex-wrap:wrap; gap:32px; justify-content:space-between; align-items:flex-start;">
+      <div>
+        <img src="assets/noma-wordmark-cream.png" alt="NŌMA people" style="display:block; height:50px; width:auto;">
+        <p style="margin-top:14px; font-size:15px; opacity:0.7; max-width:24em; line-height:1.5;">Kontaktní improvizace Plzeň · letní série lekcí 2026 · move. meet. melt.</p>
+      </div>
+      <div style="display:flex; gap:48px; flex-wrap:wrap;">
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:15px;">
+          <span style="font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; opacity:0.5;">Kde</span>
+          <span style="opacity:0.85;">Ateliér J7</span>
+          <span style="opacity:0.85;">Jablonského 7, Plzeň</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:15px;">
+          <span style="font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; opacity:0.5;">Spojení</span>
+          <a href="https://www.instagram.com/maya_cz" target="_blank" rel="noopener" style="opacity:0.85;" style-hover="opacity:1;">Instagram @maya_cz</a>
+          <a href="#prihlasit" style="opacity:0.85;" style-hover="opacity:1;">Přihlásit se</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1180px; margin:36px auto 0; padding-top:24px; border-top:1px solid rgba(244,236,198,0.16); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:13px; opacity:0.55;">
+      <span>nomapeople.com/plzen</span>
+      <span>© 2026 NŌMA people</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;formMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;inline&quot;,&quot;google&quot;],&quot;default&quot;:&quot;google&quot;,&quot;tsType&quot;:&quot;'inline'|'google'&quot;}}">
+class Component extends DCLogic {
+  state = { openFaq: null, formDone: false, formError: "" };
+
+  nameRef = React.createRef();
+  emailRef = React.createRef();
+  phoneRef = React.createRef();
+  noteRef = React.createRef();
+  gdprRef = React.createRef();
+  photoRef = React.createRef();
+
+  componentDidMount() {
+    // IntersectionObserver is unreliable in this embed — use a scroll-driven reveal.
+    const root = this.el || document;
+    this._reveals = Array.from(root.querySelectorAll('[data-reveal]'));
+    this._reveals.forEach((el) => {
+      el.dataset.shown = '0';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1)';
+      el.style.willChange = 'opacity, transform';
+    });
+    this._reveal = () => {
+      const vh = window.innerHeight || 800;
+      this._reveals.forEach((el) => {
+        if (el.dataset.shown === '1') return;
+        const top = el.getBoundingClientRect().top;
+        if (top < vh * 0.9) {
+          el.dataset.shown = '1';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }
+      });
+    };
+    // Force-show any element that is meant to be visible but is stuck hidden
+    // (animation timeline is frozen in some embedded previews).
+    this._settle = () => {
+      this._reveals.forEach((el) => {
+        if (el.dataset.shown !== '1') return;
+        if (parseFloat(getComputedStyle(el).opacity) < 0.9) {
+          el.style.transition = 'none';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }
+      });
+    };
+    this._revealAll = () => {
+      this._reveals.forEach((el) => {
+        el.dataset.shown = '1';
+        el.style.transition = 'none';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    };
+    window.addEventListener('scroll', this._reveal, { passive: true, capture: true });
+    window.addEventListener('resize', this._reveal, { passive: true });
+    requestAnimationFrame(this._reveal);
+    setTimeout(this._reveal, 60);
+    setTimeout(this._settle, 1500);
+    // ultimate safety net so nothing can ever stay hidden permanently
+    this._safety = setTimeout(this._revealAll, 2800);
+
+    // Dancer line draws via CSS; if the timeline is frozen (some embeds),
+    // force it drawn after the animation would have finished in a real browser.
+    const dp = (root.querySelector ? root.querySelector('#dancerWrap') : null) || document.getElementById('dancerWrap');
+    if (dp) {
+      this._dancer = setTimeout(() => {
+        const cp = getComputedStyle(dp).clipPath || '';
+        if (cp.indexOf('100%') !== -1 || cp.indexOf('inset') !== -1) { dp.style.animation = 'none'; dp.style.clipPath = 'none'; }
+      }, 2700);
+    }
+
+    // Scrollspy — highlight the nav item for the section currently in view.
+    this._spyLinks = Array.from(root.querySelectorAll('[data-spy]'));
+    this._spy = () => {
+      const offset = window.innerWidth <= 767 ? Math.max(Math.round((window.innerHeight || 800) * 0.35), 140) : 120;
+      let current = null;
+      this._spyLinks.forEach((a) => {
+        const sec = root.querySelector('#' + a.dataset.spy);
+        if (!sec) return;
+        const r = sec.getBoundingClientRect();
+        if (r.top <= offset && r.bottom > offset) current = a.dataset.spy;
+      });
+      this._spyLinks.forEach((a) => {
+        const on = a.dataset.spy === current;
+        a.dataset.active = on ? '1' : '0';
+        a.setAttribute('aria-current', on ? 'true' : 'false');
+      });
+    };
+    window.addEventListener('scroll', this._spy, { passive: true, capture: true });
+    window.addEventListener('resize', this._spy, { passive: true });
+    this._spy();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._reveal, true);
+    window.removeEventListener('resize', this._reveal);
+    clearTimeout(this._safety);
+    clearTimeout(this._dancer);
+    window.removeEventListener('scroll', this._spy, true);
+    window.removeEventListener('resize', this._spy);
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    const name = (this.nameRef.current?.value || '').trim();
+    const email = (this.emailRef.current?.value || '').trim();
+    const gdpr = this.gdprRef.current?.checked;
+    if (!name) { this.setState({ formError: 'Vyplň prosím jméno a příjmení.' }); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { this.setState({ formError: 'Zkontroluj prosím e-mailovou adresu.' }); return; }
+    if (!gdpr) { this.setState({ formError: 'Pro registraci potřebujeme souhlas se zpracováním údajů.' }); return; }
+    this.setState({ formError: '', formDone: true });
+  };
+
+  resetForm = () => {
+    this.setState({ formDone: false, formError: '' });
+    [this.nameRef, this.emailRef, this.phoneRef, this.noteRef].forEach((r) => { if (r.current) r.current.value = ''; });
+    [this.gdprRef, this.photoRef].forEach((r) => { if (r.current) r.current.checked = false; });
+  };
+
+  toggleFaq = (i) => this.setState((s) => ({ openFaq: s.openFaq === i ? null : i }));
+
+  renderVals() {
+    const mode = this.props.formMode ?? 'google';
+    const faqData = [
+      { q: 'Musím mít taneční zkušenost?', a: 'Vůbec ne. Lekce jsou vhodné pro úplné začátečníky. Jestli umíš chodit, padat nebo se občas o někoho opřít, máš skvělý základ ;-)' },
+      { q: 'Musím přijít s partnerem?', a: 'Ne. Pracujeme ve dvojici i ve skupině a dvojice si přirozeně tvoříme na místě. Přijď klidně sám/sama.' },
+      { q: 'Co si mám vzít na sebe?', a: 'Pohodlné oblečení, ideálně s dlouhými rukávy a nohavicemi. Budeme bosky nebo v ponožkách. A vezmi si láhev vody.' },
+      { q: 'Musím chodit pravidelně?', a: 'Nemusíš. Lekce probíhají každé pondělí 18–20 h od 22. 6. do 31. 8. 2026 a můžeš přijít kdykoliv ti to vyjde — platí se po jednotlivých lekcích.' },
+      { q: 'Kdy mám dorazit?', a: 'Doraž prosím 10 minut před začátkem, ať se můžeš pomalu naladit, protáhnout a přivítat.' },
+      { q: 'Jak se přihlásím a jak platím?', a: 'Přihlas se přes formulář na této stránce. Platba je 300 Kč za lekci (2 hodiny) a probíhá na místě před začátkem.' },
+    ];
+    const faqs = faqData.map((f, i) => {
+      const open = this.state.openFaq === i;
+      return { q: f.q, a: f.a, toggle: () => this.toggleFaq(i), icon: open ? '–' : '+', mh: open ? '260px' : '0px' };
+    });
+
+    return {
+      dancerD: 'M168 590 C160 520 150 470 178 444 C120 462 64 452 58 416 C53 386 92 372 132 388 C90 366 74 326 106 304 C140 282 186 300 198 338 C190 296 192 262 220 252 C198 226 204 192 232 192 C214 164 226 132 252 140 C238 116 256 96 278 110 C296 124 286 156 260 164 C286 174 294 210 266 226 C298 232 308 276 274 298 C314 308 330 356 292 380 C330 392 338 436 300 450 C256 466 176 460 146 436 C188 456 256 458 306 438',
+      faqs,
+      formDone: this.state.formDone,
+      formOpen: !this.state.formDone,
+      formError: this.state.formError,
+      onSubmit: this.onSubmit,
+      resetForm: this.resetForm,
+      nameRef: this.nameRef,
+      emailRef: this.emailRef,
+      phoneRef: this.phoneRef,
+      noteRef: this.noteRef,
+      gdprRef: this.gdprRef,
+      photoRef: this.photoRef,
+      showInline: mode === 'inline',
+      showGoogle: mode === 'google',
+      googleUrl: 'https://docs.google.com/forms/d/1XN-13nx-tOQ_3EeQqp1_qpTwIYPxed6Djol9xuJ1RCg/viewform',
+    };
+  }
+}
+</script>
+</body>
+</html>
