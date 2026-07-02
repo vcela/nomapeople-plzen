@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Cookie consent gate: loads Google Analytics (and, once configured, Meta
+     Pixel) only after the visitor accepts in the cookie banner. Lives in the
+     real <head> (not <helmet> below) so the banner appears and analytics
+     stays gated even if the React CDN load that the rest of the page depends
+     on is slow or fails — never add an unconditional gtag.js/fbq snippet
+     anywhere in this file. -->
+<script src="assets/consent.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -35,6 +42,8 @@
 <meta name="twitter:title" content="Kontaktní improvizace Plzeň | NŌMA people">
 <meta name="twitter:description" content="Letní série lekcí kontaktní improvizace v Plzni. Vhodné i pro začátečníky, každé pondělí v Pohybovém Ateliéru J7.">
 <meta name="twitter:image" content="https://nomapeople.com/plzen/assets/share-image.png?v=20260615">
+<!-- Cookie consent + analytics loading now lives in the real <head> above
+     (assets/consent.js), not here — see the note there for why. -->
 <style>
   *{ box-sizing:border-box; margin:0; padding:0; }
   :root{
@@ -118,6 +127,9 @@
         <a href="#info" data-spy="info" data-active="0" class="nav-link">Info</a>
         <a href="#lektorka" data-spy="lektorka" data-active="0" class="nav-link">Lektorka</a>
         <a href="#faq" data-spy="faq" data-active="0" class="nav-link">FAQ</a>
+        <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+          <a href="admin/" class="nav-link">Administrace</a>
+        </sc-if>
         <a href="#prihlasit" data-spy="prihlasit" data-active="0" class="nav-cta">Přihlásit</a>
       </nav>
     </div>
@@ -349,7 +361,7 @@
 
               <label style="display:flex; gap:12px; align-items:flex-start; cursor:pointer; background:#fff; border:1.5px solid rgba(136,72,88,0.2); border-radius:14px; padding:14px 16px;">
                 <input ref="{{ gdprRef }}" type="checkbox" style="flex:none; width:20px; height:20px; margin-top:2px; accent-color:#884858;">
-                <span style="font-size:13px; line-height:1.5; color:#4a3f3a;"><strong style="color:#884858;">Souhlas se zpracováním údajů *</strong> — souhlasím se zpracováním osobních údajů (jméno, e-mail, telefon) správcem NŌMA People pro účely registrace a&nbsp;organizační komunikace. Údaje uchováváme max. 6 měsíců od akce a&nbsp;nesdílíme je mimo nezbytné služby. Souhlas lze kdykoli odvolat.</span>
+                <span style="font-size:13px; line-height:1.5; color:#4a3f3a;"><strong style="color:#884858;">Souhlas se zpracováním údajů *</strong> — souhlasím se zpracováním osobních údajů (jméno, e-mail, telefon) správcem NŌMA People pro účely registrace a&nbsp;organizační komunikace. Údaje uchováváme max. 6 měsíců od akce a&nbsp;nesdílíme je mimo nezbytné služby. Souhlas lze kdykoli odvolat. Více v&nbsp;<a href="zasady-ochrany-osobnich-udaju.html" target="_blank" rel="noopener" style="color:#884858; text-decoration:underline;">Zásadách ochrany osobních údajů</a>.</span>
               </label>
               <label style="display:flex; gap:12px; align-items:flex-start; cursor:pointer; background:#fff; border:1.5px solid rgba(136,72,88,0.2); border-radius:14px; padding:14px 16px;">
                 <input ref="{{ photoRef }}" type="checkbox" style="flex:none; width:20px; height:20px; margin-top:2px; accent-color:#884858;">
@@ -360,7 +372,7 @@
                 <div style="background:#fbe3e3; color:#9a2b2b; border-radius:12px; padding:12px 16px; font-size:14px; font-weight:600;">{{ formError }}</div>
               </sc-if>
 
-              <button type="submit" style="background:#884858; color:#f4ecc6; font-weight:800; font-size:17px; padding:17px; border:none; border-radius:999px; cursor:pointer; margin-top:4px; transition:background .2s, transform .2s, box-shadow .2s;" style-hover="background:#6f3a47; transform:translateY(-2px); box-shadow:0 14px 30px -14px rgba(42,35,32,0.6);">Odeslat přihlášku →</button>
+              <button type="submit" disabled="{{ submitting }}" style="background:#884858; color:#f4ecc6; font-weight:800; font-size:17px; padding:17px; border:none; border-radius:999px; cursor:pointer; margin-top:4px; transition:background .2s, transform .2s, box-shadow .2s; opacity:{{ submitOpacity }};" style-hover="background:#6f3a47; transform:translateY(-2px); box-shadow:0 14px 30px -14px rgba(42,35,32,0.6);">{{ submitLabel }}</button>
               <p style="font-size:12px; text-align:center; color:rgba(74,63,58,0.7);">* povinné pole</p>
             </form>
           </sc-if>
@@ -399,17 +411,21 @@
         </div>
       </div>
     </div>
-    <div style="max-width:1180px; margin:36px auto 0; padding-top:24px; border-top:1px solid rgba(244,236,198,0.16); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:13px; opacity:0.55;">
+    <div style="max-width:1180px; margin:36px auto 0; padding-top:24px; border-top:1px solid rgba(244,236,198,0.16); display:flex; flex-wrap:wrap; gap:12px 20px; justify-content:space-between; font-size:13px; opacity:0.55;">
       <span>nomapeople.com/plzen</span>
+      <span style="display:flex; flex-wrap:wrap; gap:6px 16px;">
+        <a href="zasady-ochrany-osobnich-udaju.html" style-hover="opacity:1;">Ochrana osobních údajů</a>
+        <button type="button" onClick="{{ openCookieSettings }}" style="background:none; border:none; padding:0; font:inherit; color:inherit; opacity:1; cursor:pointer; text-decoration:underline;">Nastavení cookies</button>
+      </span>
       <span>© 2026 NŌMA people</span>
     </div>
   </footer>
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;formMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;inline&quot;,&quot;google&quot;],&quot;default&quot;:&quot;google&quot;,&quot;tsType&quot;:&quot;'inline'|'google'&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;formMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;inline&quot;,&quot;google&quot;],&quot;default&quot;:&quot;inline&quot;,&quot;tsType&quot;:&quot;'inline'|'google'&quot;}}">
 class Component extends DCLogic {
-  state = { openFaq: null, formDone: false, formError: "" };
+  state = { openFaq: null, formDone: false, formError: "", submitting: false, isAdmin: false };
 
   nameRef = React.createRef();
   emailRef = React.createRef();
@@ -499,6 +515,12 @@ class Component extends DCLogic {
     window.addEventListener('scroll', this._spy, { passive: true, capture: true });
     window.addEventListener('resize', this._spy, { passive: true });
     this._spy();
+
+    // Admin nav link — only shown when a logged-in admin session is detected.
+    fetch('api/session.php')
+      .then((r) => (r.ok ? r.json() : { isAdmin: false }))
+      .then((d) => this.setState({ isAdmin: !!d.isAdmin }))
+      .catch(() => {});
   }
 
   componentWillUnmount() {
@@ -512,13 +534,33 @@ class Component extends DCLogic {
 
   onSubmit = (e) => {
     e.preventDefault();
+    if (this.state.submitting) return;
     const name = (this.nameRef.current?.value || '').trim();
     const email = (this.emailRef.current?.value || '').trim();
     const gdpr = this.gdprRef.current?.checked;
     if (!name) { this.setState({ formError: 'Vyplň prosím jméno a&nbsp;příjmení.' }); return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { this.setState({ formError: 'Zkontroluj prosím e-mailovou adresu.' }); return; }
     if (!gdpr) { this.setState({ formError: 'Pro registraci potřebujeme souhlas se zpracováním údajů.' }); return; }
-    this.setState({ formError: '', formDone: true });
+
+    this.setState({ formError: '', submitting: true });
+    fetch('api/register.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        phone: (this.phoneRef.current?.value || '').trim(),
+        note: (this.noteRef.current?.value || '').trim(),
+        gdpr: !!gdpr,
+        photo: !!this.photoRef.current?.checked,
+      }),
+    })
+      .then(async (r) => {
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok || !data.ok) throw new Error(data.error || 'Něco se nepovedlo, zkus to prosím znovu.');
+        this.setState({ formDone: true, submitting: false });
+      })
+      .catch((err) => this.setState({ formError: err.message, submitting: false }));
   };
 
   resetForm = () => {
@@ -529,8 +571,12 @@ class Component extends DCLogic {
 
   toggleFaq = (i) => this.setState((s) => ({ openFaq: s.openFaq === i ? null : i }));
 
+  openCookieSettings = () => {
+    if (window.nmOpenCookieSettings) window.nmOpenCookieSettings();
+  };
+
   renderVals() {
-    const mode = this.props.formMode ?? 'google';
+    const mode = this.props.formMode ?? 'inline';
     const faqData = [
       { q: 'Musím mít taneční zkušenost?', a: 'Vůbec ne. Lekce jsou vhodné pro úplné začátečníky. Jestli umíš chodit, padat nebo se občas o někoho opřít, máš skvělý základ ;-)' },
       { q: 'Musím přijít s&nbsp;partnerem?', a: 'Ne. Pracujeme ve dvojici i ve skupině a&nbsp;dvojice si přirozeně tvoříme na místě. Přijď klidně sám/sama.' },
@@ -550,6 +596,11 @@ class Component extends DCLogic {
       formDone: this.state.formDone,
       formOpen: !this.state.formDone,
       formError: this.state.formError,
+      submitting: this.state.submitting,
+      submitLabel: this.state.submitting ? 'Odesílám…' : 'Odeslat přihlášku →',
+      submitOpacity: this.state.submitting ? '0.7' : '1',
+      isAdmin: this.state.isAdmin,
+      openCookieSettings: this.openCookieSettings,
       onSubmit: this.onSubmit,
       resetForm: this.resetForm,
       nameRef: this.nameRef,
