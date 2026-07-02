@@ -49,8 +49,7 @@ function current_admin(): ?array {
 function require_admin(): array {
     $admin = current_admin();
     if (!$admin) {
-        header('Location: login.php');
-        exit;
+        admin_redirect('login.php');
     }
     return $admin;
 }

@@ -12,10 +12,15 @@ CREATE TABLE IF NOT EXISTS registrations (
   gdpr_consent  TINYINT(1) NOT NULL DEFAULT 0,
   photo_consent TINYINT(1) NOT NULL DEFAULT 0,
   created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at    DATETIME NULL,
   PRIMARY KEY (id),
   KEY idx_registrations_created_at (created_at),
   KEY idx_registrations_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Safe to re-run against a database that was already created from an older
+-- version of this file (MariaDB-specific "IF NOT EXISTS" on ADD COLUMN).
+ALTER TABLE registrations ADD COLUMN IF NOT EXISTS deleted_at DATETIME NULL AFTER created_at;
 
 CREATE TABLE IF NOT EXISTS admin_users (
   id            INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -50,6 +55,14 @@ CREATE TABLE IF NOT EXISTS settings (
 -- Seed: notification recipient (editable later via admin/settings.php)
 INSERT INTO settings (setting_key, setting_value) VALUES
   ('notification_email', 'ondrej.huk@gmail.com')
+ON DUPLICATE KEY UPDATE setting_value = setting_value;
+
+-- Seed: which weekday the class happens on (ISO-8601: 1=pondělí .. 7=neděle),
+-- used by admin/index.php to group registrations by upcoming lesson.
+-- Editable later via admin/settings.php. Default matches the current site
+-- copy ("každé pondělí").
+INSERT INTO settings (setting_key, setting_value) VALUES
+  ('lesson_weekday', '1')
 ON DUPLICATE KEY UPDATE setting_value = setting_value;
 
 -- Seed: one admin user. Password is '123456' (bcrypt hash below, verified working).

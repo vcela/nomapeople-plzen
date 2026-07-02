@@ -36,6 +36,14 @@
   th{ font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:#6f3a47; }
   .badge-yes{ color:#1f7a4d; font-weight:700; }
   .badge-no{ color:#9a2b2b; font-weight:700; }
+  .group-card{ background:#f6efde; border:1px solid rgba(136,72,88,0.16); border-radius:16px; margin-bottom:28px; overflow:hidden; }
+  .group-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 20px; background:rgba(136,72,88,0.08); border-bottom:2px dashed rgba(136,72,88,0.35); font-weight:700; color:#884858; }
+  .group-header .group-count{ font-size:12px; font-weight:700; background:#884858; color:#f4ecc6; padding:4px 12px; border-radius:999px; white-space:nowrap; }
+  .group-card table{ margin:0; }
+  .group-card tr:last-child td{ border-bottom:none; }
+  tr.row-deleted{ opacity:0.5; text-decoration:line-through; }
+  .row-action-btn{ font:inherit; font-size:12px; background:transparent; border:1px solid rgba(136,72,88,0.4); color:#884858; padding:6px 12px; border-radius:8px; cursor:pointer; white-space:nowrap; }
+  .row-action-btn:hover{ background:rgba(136,72,88,0.1); }
   label{ display:block; font-size:13px; font-weight:700; color:#884858; margin-bottom:6px; }
   input[type=email], input[type=password], input[type=text]{ width:100%; max-width:360px; padding:10px 12px; border:1.5px solid rgba(136,72,88,0.25); border-radius:10px; font-size:15px; margin-bottom:16px; }
   button[type=submit], .btn{ background:#884858; color:#f4ecc6; font-weight:700; border:none; padding:11px 20px; border-radius:999px; cursor:pointer; font-size:14px; }

@@ -8,9 +8,8 @@ require_once __DIR__ . '/../inc/csrf.php';
 auth_bootstrap();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !csrf_verify($_POST['csrf'] ?? null)) {
-    header('Location: index.php');
-    exit;
+    admin_redirect('index.php');
 }
 
 logout_admin();
-header('Location: login.php');
+admin_redirect('login.php');

@@ -8,8 +8,7 @@ require_once __DIR__ . '/../inc/csrf.php';
 auth_bootstrap();
 
 if (current_admin()) {
-    header('Location: index.php');
-    exit;
+    admin_redirect('index.php');
 }
 
 $error = null;
@@ -33,8 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($ok) {
             login_admin((int) $row['id']);
-            header('Location: index.php');
-            exit;
+            admin_redirect('index.php');
         }
 
         usleep(random_int(150000, 350000));
