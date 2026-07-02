@@ -1,0 +1,6 @@
+# Without this, a bare "/admin/" request 403s on hosts whose default
+# DirectoryIndex only lists index.html (this site was static before the PHP
+# admin panel was added) — directory listing is (correctly) disabled, so
+# Apache has nothing to fall back to even though admin/index.php exists and
+# works fine when hit directly. This makes the bare directory resolve to it.
+DirectoryIndex index.php
