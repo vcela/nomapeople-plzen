@@ -558,6 +558,11 @@ class Component extends DCLogic {
       .then(async (r) => {
         const data = await r.json().catch(() => ({}));
         if (!r.ok || !data.ok) throw new Error(data.error || 'Něco se nepovedlo, zkus to prosím znovu.');
+        // GA4 conversion event — only fires if analytics consent was given
+        // (window.gtag only exists once assets/consent.js has loaded GA4).
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', { form_name: 'prihlaska_lekce' });
+        }
         this.setState({ formDone: true, submitting: false });
       })
       .catch((err) => this.setState({ formError: err.message, submitting: false }));
