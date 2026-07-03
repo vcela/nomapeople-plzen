@@ -36,6 +36,19 @@ $note = trim((string) ($input['note'] ?? ''));
 $gdpr = ($input['gdpr'] ?? false) === true;
 $photo = ($input['photo'] ?? false) === true;
 
+// Marketing-source attribution — computed client-side by assets/attribution.js
+// from document.referrer / UTM params. Informational only (shown in the admin
+// panel), so an unrecognized/missing type just falls back to 'direct' rather
+// than rejecting the whole registration.
+$sourceType = trim((string) ($input['sourceType'] ?? ''));
+$sourceLabel = trim((string) ($input['sourceLabel'] ?? ''));
+if (!in_array($sourceType, ['direct', 'search', 'ads', 'referral', 'campaign'], true)) {
+    $sourceType = 'direct';
+}
+if ($sourceLabel === '' || mb_strlen($sourceLabel) > 255) {
+    $sourceLabel = 'Přímá návštěva';
+}
+
 if ($name === '' || mb_strlen($name) > 190) {
     json_response(['ok' => false, 'error' => 'Vyplň prosím jméno a příjmení.'], 400);
 }
@@ -54,9 +67,9 @@ if (!$gdpr) {
 
 try {
     $stmt = db()->prepare(
-        'INSERT INTO registrations (name, email, phone, note, gdpr_consent, photo_consent) VALUES (?, ?, ?, ?, ?, ?)'
+        'INSERT INTO registrations (name, email, phone, note, gdpr_consent, photo_consent, source_type, source_label) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
     );
-    $stmt->execute([$name, $email, $phone ?: null, $note ?: null, $gdpr ? 1 : 0, $photo ? 1 : 0]);
+    $stmt->execute([$name, $email, $phone ?: null, $note ?: null, $gdpr ? 1 : 0, $photo ? 1 : 0, $sourceType, $sourceLabel]);
 } catch (Throwable $e) {
     error_log('[register] DB insert failed: ' . $e->getMessage());
     json_response(['ok' => false, 'error' => 'Něco se nepovedlo, zkus to prosím znovu.'], 500);

@@ -10,6 +10,7 @@
      on is slow or fails — never add an unconditional gtag.js/fbq snippet
      anywhere in this file. -->
 <script src="assets/consent.js"></script>
+<script src="assets/attribution.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -299,7 +300,7 @@
         <span style="font-family:'Public Sans',cursive; font-size:24px; color:#8fb6c7;">06 — kudy k&nbsp;nám</span>
         <h2 style="font-size:clamp(28px,3.6vw,46px); line-height:1.04; font-weight:300; letter-spacing:-0.02em; margin:12px 0 18px;">Pohybový Ateliér J7</h2>
         <p style="font-size:19px; line-height:1.5; opacity:0.92;">Jablonského 7<br>Plzeň 2-Slovany</p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Jablonsk%C3%A9ho%207%20Plze%C5%88%20Slovany" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; margin-top:26px; background:#f4ecc6; color:#884858; font-weight:700; padding:13px 24px; border-radius:999px; transition:background .2s, transform .2s, box-shadow .2s;" style-hover="background:#fff; transform:translateY(-2px); box-shadow:0 12px 26px -12px rgba(0,0,0,0.45);">Otevřít v mapách →</a>
+        <a href="https://maps.app.goo.gl/2jgrgNA5pZqYYGGV9" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; margin-top:26px; background:#f4ecc6; color:#884858; font-weight:700; padding:13px 24px; border-radius:999px; transition:background .2s, transform .2s, box-shadow .2s;" style-hover="background:#fff; transform:translateY(-2px); box-shadow:0 12px 26px -12px rgba(0,0,0,0.45);">Otevřít v mapách →</a>
       </div>
       <div style="position:relative; display:block; background:#8fb6c7; min-height:280px; overflow:hidden; transition:transform .2s, filter .2s;">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2578.4742694731717!2d13.387510312379383!3d49.7395194381776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470af1df23155cbb%3A0x232fee36afbf88da!2zUG9oeWJvdsO9IGF0ZWxpw6lyIEo3!5e0!3m2!1sen!2scz!4v1783012360472!5m2!1sen!2scz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -547,6 +548,7 @@ class Component extends DCLogic {
     if (!gdpr) { this.setState({ formError: 'Pro registraci potřebujeme souhlas se zpracováním údajů.' }); return; }
 
     this.setState({ formError: '', submitting: true });
+    const attribution = (window.nmGetAttribution && window.nmGetAttribution()) || {};
     fetch('api/register.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -557,6 +559,8 @@ class Component extends DCLogic {
         note: (this.noteRef.current?.value || '').trim(),
         gdpr: !!gdpr,
         photo: !!this.photoRef.current?.checked,
+        sourceType: attribution.type || '',
+        sourceLabel: attribution.label || '',
       }),
     })
       .then(async (r) => {

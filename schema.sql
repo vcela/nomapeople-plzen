@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS registrations (
   photo_consent TINYINT(1) NOT NULL DEFAULT 0,
   created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   deleted_at    DATETIME NULL,
+  source_type   VARCHAR(20) NOT NULL DEFAULT 'direct',
+  source_label  VARCHAR(255) NULL,
   PRIMARY KEY (id),
   KEY idx_registrations_created_at (created_at),
   KEY idx_registrations_email (email)
@@ -21,6 +23,12 @@ CREATE TABLE IF NOT EXISTS registrations (
 -- Safe to re-run against a database that was already created from an older
 -- version of this file (MariaDB-specific "IF NOT EXISTS" on ADD COLUMN).
 ALTER TABLE registrations ADD COLUMN IF NOT EXISTS deleted_at DATETIME NULL AFTER created_at;
+
+-- Marketing-source attribution (direct / search / ads / referral / campaign),
+-- computed client-side by assets/attribution.js from document.referrer/UTM
+-- params and shown per-registration in admin/index.php.
+ALTER TABLE registrations ADD COLUMN IF NOT EXISTS source_type VARCHAR(20) NOT NULL DEFAULT 'direct' AFTER deleted_at;
+ALTER TABLE registrations ADD COLUMN IF NOT EXISTS source_label VARCHAR(255) NULL AFTER source_type;
 
 CREATE TABLE IF NOT EXISTS admin_users (
   id            INT UNSIGNED NOT NULL AUTO_INCREMENT,

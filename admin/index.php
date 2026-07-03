@@ -45,12 +45,30 @@ function czech_count_label(int $n, string $one, string $few, string $many): stri
     return $many;
 }
 
+// Colored pill for the "Zdroj" column so the traffic category (přímá /
+// vyhledávač / reklama / odkaz / kampaň) is readable at a glance without
+// having to parse the label text itself.
+function source_badge(string $type, ?string $label): string {
+    $styles = [
+        'ads'      => ['bg' => '#fbe3e3', 'fg' => '#9a2b2b', 'icon' => '📢'],
+        'search'   => ['bg' => '#e3edf3', 'fg' => '#2a5f7a', 'icon' => '🔍'],
+        'referral' => ['bg' => '#eee3f3', 'fg' => '#5b2a7a', 'icon' => '🔗'],
+        'campaign' => ['bg' => '#f3ecdd', 'fg' => '#8a6a1f', 'icon' => '✉️'],
+        'direct'   => ['bg' => '#e3f3ea', 'fg' => '#1f7a4d', 'icon' => '➜'],
+    ];
+    $s = $styles[$type] ?? $styles['direct'];
+    $text = $label !== null && $label !== '' ? $label : 'Přímá návštěva';
+    return '<span style="display:inline-block; background:' . $s['bg'] . '; color:' . $s['fg']
+        . '; font-weight:700; font-size:12px; padding:4px 10px; border-radius:999px; white-space:nowrap;">'
+        . $s['icon'] . ' ' . esc($text) . '</span>';
+}
+
 $stmt = db()->query("SELECT setting_value FROM settings WHERE setting_key = 'lesson_weekday'");
 $weekdaySetting = $stmt->fetch();
 $lessonWeekday = $weekdaySetting ? (int) $weekdaySetting['setting_value'] : 1;
 
 $registrations = db()->query(
-    'SELECT id, name, email, phone, note, gdpr_consent, photo_consent, created_at, deleted_at FROM registrations ORDER BY created_at DESC'
+    'SELECT id, name, email, phone, note, gdpr_consent, photo_consent, created_at, deleted_at, source_type, source_label FROM registrations ORDER BY created_at DESC'
 )->fetchAll();
 
 $activeTotal = 0;
@@ -98,6 +116,7 @@ require __DIR__ . '/inc/header.php';
         <th>E-mail</th>
         <th>Telefon</th>
         <th>Poznámka</th>
+        <th>Zdroj</th>
         <th>GDPR</th>
         <th>Foto/video</th>
         <th></th>
@@ -111,6 +130,7 @@ require __DIR__ . '/inc/header.php';
         <td><a href="mailto:<?= esc($r['email']) ?>"><?= esc($r['email']) ?></a></td>
         <td><?= esc($r['phone'] ?: '—') ?></td>
         <td><?= nl2br(esc($r['note'] ?: '—')) ?></td>
+        <td><?= source_badge($r['source_type'] ?: 'direct', $r['source_label']) ?></td>
         <td><?= $r['gdpr_consent'] ? '<span class="badge-yes">Ano</span>' : '<span class="badge-no">Ne</span>' ?></td>
         <td><?= $r['photo_consent'] ? '<span class="badge-yes">Ano</span>' : '<span class="badge-no">Ne</span>' ?></td>
         <td>
