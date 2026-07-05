@@ -233,8 +233,8 @@
         </ul>
       </div>
       <div style="background:#884858; color:#f4ecc6; border-radius:20px; padding:28px; align-self:stretch; display:flex; flex-direction:column; justify-content:center; gap:8px;">
-        <div style="font-family:'Public Sans',cursive; font-size:54px; line-height:1; color:#8fb6c7;">10′</div>
-        <div style="font-size:18px; font-weight:700;">Doraž 10 minut před začátkem</div>
+        <div style="font-family:'Public Sans',cursive; font-size:54px; line-height:1; color:#8fb6c7;">15′</div>
+        <div style="font-size:18px; font-weight:700;">Doraž 15 minut před začátkem</div>
         <div style="font-size:15px; opacity:0.88; line-height:1.45;">Ať se můžeš pomalu naladit, protáhnout a&nbsp;přivítat.</div>
       </div>
     </div>
@@ -338,8 +338,8 @@
           <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
             <div style="text-align:center; padding:24px 8px;">
               <div style="font-family:'Public Sans',cursive; font-size:56px; color:#8fb6c7; line-height:1;">✓</div>
-              <h3 style="font-size:28px; font-weight:300; color:#884858; margin:14px 0 8px;">Díky, jsi v hře!</h3>
-              <p style="font-size:17px; line-height:1.5; color:#4a3f3a; max-width:26em; margin:0 auto;">Ozveme se ti na e-mail s&nbsp;potvrzením. Těšíme se na tebe v Pohybovém Ateliéru J7 — nezapomeň dorazit 10 minut předem.</p>
+              <h3 style="font-size:28px; font-weight:300; color:#884858; margin:14px 0 8px;">Paráda, tvoje přihlášení už je u nás! ✨</h3>
+              <p style="font-size:17px; line-height:1.5; color:#4a3f3a; max-width:26em; margin:0 auto;">Mrkni na e-mail s potvrzením a všemi detaily.<br><br>Těšíme se na tebe v Pohybovém Ateliéru J7.<br><br>Doraz prosím o 15 minut dřív, ať máš čas se v klidu naladit, převléknout a přivítat :)</p>
               <button onClick="{{ resetForm }}" style="margin-top:22px; background:transparent; border:1.5px solid #884858; color:#884858; font-weight:700; padding:11px 22px; border-radius:999px; cursor:pointer;">Přihlásit dalšího</button>
             </div>
           </sc-if>
@@ -592,11 +592,11 @@ class Component extends DCLogic {
     const mode = this.props.formMode ?? 'inline';
     const faqData = [
       { q: 'Musím mít taneční zkušenost?', a: 'Vůbec ne. Lekce jsou vhodné pro úplné začátečníky. Jestli umíš chodit, padat nebo se občas o někoho opřít, máš skvělý základ ;-)' },
-      { q: 'Musím přijít s&nbsp;partnerem?', a: 'Ne. Pracujeme ve dvojici i ve skupině a&nbsp;dvojice si přirozeně tvoříme na místě. Přijď klidně sám/sama.' },
-      { q: 'Co si mám vzít na sebe?', a: 'Pohodlné oblečení, ideálně s&nbsp;dlouhými rukávy a&nbsp;nohavicemi. Budeme bosky nebo v ponožkách. A&nbsp;vezmi si láhev vody.' },
-      { q: 'Musím chodit pravidelně?', a: 'Nemusíš. Lekce probíhají každé pondělí 18–20 h od 22. 6. do 31. 8. 2026 a&nbsp;můžeš přijít kdykoliv ti to vyjde — platí se po jednotlivých lekcích.' },
-      { q: 'Kdy mám dorazit?', a: 'Doraž prosím 10 minut před začátkem, ať se můžeš pomalu naladit, protáhnout a&nbsp;přivítat.' },
-      { q: 'Jak se přihlásím a&nbsp;jak platím?', a: 'Přihlas se přes formulář na této stránce. Platba je 300 Kč za lekci (2 hodiny) a&nbsp;probíhá na místě před začátkem.' },
+      { q: 'Musím přijít s partnerem?', a: 'Ne. Pracujeme ve dvojici i ve skupině a dvojice si přirozeně tvoříme na místě. Přijď klidně sám/sama.' },
+      { q: 'Co si mám vzít na sebe?', a: 'Pohodlné oblečení, ideálně s dlouhými rukávy a nohavicemi. Budeme bosky nebo v ponožkách. A vezmi si láhev vody.' },
+      { q: 'Musím chodit pravidelně?', a: 'Nemusíš. Lekce probíhají každé pondělí 18–20 h od 22. 6. do 31. 8. 2026 a můžeš přijít kdykoliv ti to vyjde — platí se po jednotlivých lekcích.' },
+      { q: 'Kdy mám dorazit?', a: 'Doraž prosím 15 minut před začátkem, ať se můžeš pomalu naladit, protáhnout a přivítat.' },
+      { q: 'Jak se přihlásím a jak platím?', a: 'Přihlas se přes formulář na této stránce. Platba je 300 Kč za lekci (2 hodiny) a probíhá na místě před začátkem.' },
     ];
     const faqs = faqData.map((f, i) => {
       const open = this.state.openFaq === i;

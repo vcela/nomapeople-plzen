@@ -71,23 +71,56 @@ function send_registrant_confirmation(array $reg): void {
         $mail = make_mailer();
         $mail->addAddress($reg['email'], $reg['name']);
         $mail->isHTML(true);
-        $mail->Subject = 'Potvrzení přihlášky – kontaktní improvizace Plzeň';
+        $mail->Subject = 'Kontaktní improvizace Plzeň – letní pondělky';
 
         $name = htmlspecialchars($reg['name'], ENT_QUOTES, 'UTF-8');
         $html = <<<HTML
 <p>Ahoj {$name},</p>
-<p>díky za přihlášení na letní sérii lekcí kontaktní improvizace v Plzni! Jsi v hře.</p>
-<p>
-  <strong>Kdy:</strong> 22. 6. – 31. 8. 2026, každé pondělí 18–20 h<br>
-  <strong>Kde:</strong> Pohybový Ateliér J7, Jablonského 7, Plzeň 2-Slovany<br>
-  <strong>Cena:</strong> 300 Kč za lekci (2 hodiny), platba na místě
-</p>
-<p>Doraž prosím 10 minut před začátkem, ať se můžeš pomalu naladit, protáhnout a přivítat. Budeme bosky nebo v ponožkách — vezmi si pohodlné oblečení (ideálně s dlouhými rukávy a nohavicemi) a láhev vody.</p>
-<p>Těšíme se na tebe!<br>NŌMA people</p>
+<p>mám velkou radost, že ses přihlásil/a na letní sérii lekcí kontaktní improvizace v Plzni. Děkuji za důvěru a těším se na společné objevování pohybu, naslouchání, hravosti a kontaktu.</p>
+<p><strong>Praktické informace</strong></p>
+<p>📅 <strong>Kdy:</strong> 22. 6. – 31. 8. 2026, každé pondělí 18:00–20:00<br>
+📍 <strong>Kde:</strong> Pohybový Ateliér J7, Jablonského 7, Plzeň 2–Slovany<br>
+Zazvoň na Pohybový Ateliér a projdi rovně přes divo-zahradu až do ateliéru :)</p>
+<p>💰 <strong>Cena:</strong> 300 Kč za lekci (2 hodiny)<br>
+Platba na místě v hotovosti nebo přes QR kód.</p>
+<p>Prosím, doraž alespoň <strong>15 minut před začátkem</strong>, ať máš čas se v klidu naladit, převléknout a přivítat.</p>
+<p>Budeme bosky nebo v ponožkách. Vezmi si pohodlné oblečení, ve kterém se můžeš volně hýbat (ideálně s delšími rukávy a nohavicemi), a láhev vody.</p>
+<p>Pokud by ses na cokoliv chtěl/a zeptat, stačí odpovědět na tento e-mail.</p>
+<p>Moc se těším na společné pondělky :)</p>
+<p>P.S. Pokud bys chtěl/a pozvat kamarádku nebo kamaráda, kterému by to mohlo sedět, klidně předej info dál – přihlášení i všechny detaily najdeš na <a href="https://nomapeople.com/plzen">nomapeople.com/plzen</a>.</p>
+<p>Těším se na tebe!<br>NŌMA people</p>
 HTML;
 
+        $altBody = <<<TEXT
+Ahoj {$name},
+
+mám velkou radost, že ses přihlásil/a na letní sérii lekcí kontaktní improvizace v Plzni. Děkuji za důvěru a těším se na společné objevování pohybu, naslouchání, hravosti a kontaktu.
+
+Praktické informace
+
+Kdy: 22. 6. – 31. 8. 2026, každé pondělí 18:00–20:00
+Kde: Pohybový Ateliér J7, Jablonského 7, Plzeň 2–Slovany
+Zazvoň na Pohybový Ateliér a projdi rovně přes divo-zahradu až do ateliéru :)
+
+Cena: 300 Kč za lekci (2 hodiny)
+Platba na místě v hotovosti nebo přes QR kód.
+
+Prosím, doraž alespoň 15 minut před začátkem, ať máš čas se v klidu naladit, převléknout a přivítat.
+
+Budeme bosky nebo v ponožkách. Vezmi si pohodlné oblečení, ve kterém se můžeš volně hýbat (ideálně s delšími rukávy a nohavicemi), a láhev vody.
+
+Pokud by ses na cokoliv chtěl/a zeptat, stačí odpovědět na tento e-mail.
+
+Moc se těším na společné pondělky :)
+
+P.S. Pokud bys chtěl/a pozvat kamarádku nebo kamaráda, kterému by to mohlo sedět, klidně předej info dál – přihlášení i všechny detaily najdeš na https://nomapeople.com/plzen
+
+Těším se na tebe!
+NŌMA people
+TEXT;
+
         $mail->Body = $html;
-        $mail->AltBody = strip_tags(str_replace('<br>', "\n", $html));
+        $mail->AltBody = $altBody;
         $mail->send();
     } catch (Throwable $e) {
         error_log('[mailer] registrant confirmation failed: ' . $e->getMessage());
