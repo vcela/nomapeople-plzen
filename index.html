@@ -63,19 +63,19 @@ input,textarea,button{font-family:inherit;}
 <div style="font-family:'Montserrat',sans-serif;font-weight:400;color:#753B4D;background:#F2E9E1;overflow-x:hidden;position:relative;">
 
   <!-- ===== HEADER ===== -->
-  <header style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,64px);">
+  <header style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,64px);flex-wrap:wrap;gap:2rem;">
     <a href="#top" style="{{ logoStyle }}">NŌMA<span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:0.55em;letter-spacing:0.22em;margin-left:6px;">people</span><span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.42em;letter-spacing:0.3em;text-transform:uppercase;margin-left:12px;padding-left:12px;border-left:1px solid currentColor;opacity:0.75;">Plzeň</span></a>
     <nav style="display:flex;gap:clamp(16px,2.4vw,40px);align-items:center;">
       <span class="np-nav-links" style="display:flex;gap:clamp(16px,2.4vw,40px);align-items:center;">
-        <a href="#o-ci" style="{{ navLinkStyle }}" style-hover="{{ navLinkHover }}">co to je</a>
-        <a href="#info" style="{{ navLinkStyle }}" style-hover="{{ navLinkHover }}">info</a>
-        <a href="#lektorka" style="{{ navLinkStyle }}" style-hover="{{ navLinkHover }}">lektorka</a>
-        <a href="#faq" style="{{ navLinkStyle }}" style-hover="{{ navLinkHover }}">faq</a>
+        <a href="#o-ci" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">co to je</a>
+        <a href="#info" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">info</a>
+        <a href="#lektorka" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">lektorka</a>
+        <a href="#faq" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">faq</a>
         <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
-          <a href="admin/" style="{{ navLinkStyle }}" style-hover="{{ navLinkHover }}">administrace</a>
+          <a href="admin/" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">administrace</a>
         </sc-if>
       </span>
-      <a href="#prihlasit" style="{{ navCtaStyle }}" style-hover="{{ navCtaHover }}">přihlásit</a>
+      <a href="#prihlasit" style="{{ navCtaStyle }}" style-hover="background:#753B4D !important;color:#F2E9E1 !important;border-color:#753B4D !important;">přihlásit</a>
     </nav>
   </header>
 
@@ -93,8 +93,8 @@ input,textarea,button{font-family:inherit;}
         <p style="font-family:'Roxborough CF','Gloock',serif;font-style:italic;color:#A3D1F0;font-size:clamp(20px,2.4vw,32px);margin:18px 0 0;">move. listen. connect.</p>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;">
-        <a href="#prihlasit" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#753B4D;background:#F2E9E1;border:1.5px solid #F2E9E1;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:15px 32px;border-radius:999px;transition:all .3s;" style-hover="background:transparent;color:#F2E9E1;">→ přihlásit se na lekci</a>
-        <a href="#o-ci" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#F2E9E1;border:1.5px solid #F2E9E1;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:15px 32px;border-radius:999px;transition:all .3s;" style-hover="background:#F2E9E1;color:#753B4D;">co to je?</a>
+        <a href="#prihlasit" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#753B4D;background:#F2E9E1;border:1.5px solid #F2E9E1;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:15px 32px;border-radius:999px;transition:all .3s;" style-hover="background:transparent !important;color:#F2E9E1 !important;">→ přihlásit se na lekci</a>
+        <a href="#o-ci" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#F2E9E1;border:1.5px solid #F2E9E1;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:15px 32px;border-radius:999px;transition:all .3s;" style-hover="background:#F2E9E1 !important;color:#753B4D !important;">co to je?</a>
       </div>
     </div>
   </section>
@@ -152,18 +152,18 @@ input,textarea,button{font-family:inherit;}
       <p style="margin:0;max-width:360px;font-size:15px;line-height:1.65;opacity:0.78;">Lekce probíhají každé pondělí a&nbsp;můžeš přijít, kdykoliv ti to vyjde — platí se po jednotlivých lekcích.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,2.6vw,36px);position:relative;">
-      <div style="display:flex;flex-direction:column;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px);background:#FBF6F0;">
+      <div style="display:flex;flex-direction:column;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px) !important;background:#FBF6F0 !important;">
         <p style="margin:0 0 14px;font-size:11.5px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.6;">kdy</p>
         <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(28px,2.6vw,40px);margin:0 0 10px;line-height:1.05;">22. 6. – 31. 8. 2026</p>
         <p style="margin:0;font-size:14.5px;line-height:1.7;opacity:0.85;">každé pondělí · 18–20 h</p>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Jablonsk%C3%A9ho%207%20Plze%C5%88%20Slovany" target="_blank" rel="noopener" style="display:flex;flex-direction:column;text-decoration:none;color:#753B4D;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px);background:#FBF6F0;">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Jablonsk%C3%A9ho%207%20Plze%C5%88%20Slovany" target="_blank" rel="noopener" style="display:flex;flex-direction:column;text-decoration:none;color:#753B4D;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px) !important;background:#FBF6F0 !important;">
         <p style="margin:0 0 14px;font-size:11.5px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.6;">kde</p>
         <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(28px,2.6vw,40px);margin:0 0 10px;line-height:1.05;">Pohybový Ateliér J7</p>
         <p style="margin:0;font-size:14.5px;line-height:1.7;opacity:0.85;">Jablonského 7, Plzeň 2-Slovany</p>
         <span style="margin-top:auto;padding-top:16px;font-family:'Roxborough CF','Gloock',serif;font-style:italic;font-size:15px;border-bottom:2px solid #A3D1F0;align-self:flex-start;">otevřít v mapách ↗</span>
       </a>
-      <div style="display:flex;flex-direction:column;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px);background:#FBF6F0;">
+      <div style="display:flex;flex-direction:column;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px) !important;background:#FBF6F0 !important;">
         <p style="margin:0 0 14px;font-size:11.5px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.6;">cena</p>
         <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(28px,2.6vw,40px);margin:0 0 10px;line-height:1.05;">300 Kč</p>
         <p style="margin:0;font-size:14.5px;line-height:1.7;opacity:0.85;">za lekci · 2 hodiny pohybu · platba na místě</p>
@@ -207,7 +207,7 @@ input,textarea,button{font-family:inherit;}
           <p style="font-size:15.5px;line-height:1.75;margin:0 0 12px;opacity:0.9;">Ahoj, jsem tanečnice, lektorka a&nbsp;vizuální umělkyně, propojuji pohyb s&nbsp;tvorbou a&nbsp;estetikou :) Můj pohybový jazyk vychází ze <strong style="font-weight:600;color:#A3D1F0;">street dance</strong>, ale postupně jsem se přesunula i k&nbsp;contemporary, dancehallu a&nbsp;africkým stylům. Založila jsem dvě taneční skupiny, působila v profesionálním uskupení Dance2xs a&nbsp;tvořila site-specific představení, v nichž se propojovaly různé tvůrčí světy a&nbsp;taneční scéna mého rodného města Plzně.</p>
           <p style="font-size:15.5px;line-height:1.75;margin:0 0 12px;opacity:0.9;">V posledních letech se ale moje cesta víc otáčí dovnitř. Hledám udržitelnější způsob, jak být v pohybu i v životě.</p>
           <p style="font-size:15.5px;line-height:1.75;margin:0 0 26px;opacity:0.9;">Kontaktní improvizaci jsem objevila úplnou náhodou na severu Thajska. Tam jsem se zamilovala a&nbsp;pokračovala své učení po asijských zemích. Nacházela různé komunity a&nbsp;každý svým způsobem obohatil mé vnímání kontaktní improvizace, pohybu i tance. Pořád jsem v procesu učení, a&nbsp;možná právě to mě na tom baví nejvíc. <em style="font-style:italic;color:#A3D1F0;">Tak pojďme objevovat spolu :)</em></p>
-          <a href="https://www.instagram.com/maya_cz" target="_blank" rel="noopener" style="display:inline-flex;text-decoration:none;color:#F2E9E1;border:2px solid rgba(242,233,225,0.7);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 28px;border-radius:999px;transition:all .25s;" style-hover="background:#F2E9E1;color:#753B4D;">@maya_cz na Instagramu ↗</a>
+          <a href="https://www.instagram.com/maya_cz" target="_blank" rel="noopener" class="scp3" style="display:inline-flex;text-decoration:none;color:#F2E9E1;border:2px solid rgba(242,233,225,0.7);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 28px;border-radius:999px;transition:all .25s;" style-hover="background:#F2E9E1;color:#753B4D;">@maya_cz na Instagramu ↗</a>
         </div>
       </div>
     </div>
@@ -267,7 +267,7 @@ input,textarea,button{font-family:inherit;}
         <p style="margin:0 0 18px;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;opacity:0.6;">kudy k&nbsp;nám</p>
         <h2 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(30px,3.4vw,50px);margin:0 0 18px;line-height:1.02;">Pohybový <em style="font-style:italic;">Ateliér J7</em></h2>
         <p style="font-size:16px;line-height:1.6;margin:0 0 28px;opacity:0.85;">Jablonského 7<br>Plzeň 2-Slovany</p>
-        <a href="https://maps.app.goo.gl/2jgrgNA5pZqYYGGV9" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#753B4D;border:1.5px solid #753B4D;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:14px 30px;border-radius:999px;transition:all .3s;" style-hover="background:#753B4D;color:#F2E9E1;">otevřít v mapách →</a>
+        <a href="https://maps.app.goo.gl/2jgrgNA5pZqYYGGV9" target="_blank" rel="noopener" class="scp1" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#753B4D;border:1.5px solid #753B4D;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:14px 30px;border-radius:999px;transition:all .3s;" style-hover="background:#753B4D;color:#F2E9E1;">otevřít v mapách →</a>
       </div>
       <div style="position:relative;min-height:300px;background:#A3D1F0;">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2578.4742694731717!2d13.387510312379383!3d49.7395194381776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470af1df23155cbb%3A0x232fee36afbf88da!2zUG9oeWJvdsO9IGF0ZWxpw6lyIEo3!5e0!3m2!1sen!2scz!4v1783012360472!5m2!1sen!2scz" width="100%" height="100%" style="border:0;position:absolute;inset:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
