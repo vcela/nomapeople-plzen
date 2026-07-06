@@ -1,0 +1,31 @@
+# Security headers for the public site. Wrapped in <IfModule> so a host
+# without mod_headers still serves the site instead of a 500 error.
+<IfModule mod_headers.c>
+  # Prevents MIME-sniffing a response away from its declared Content-Type.
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Blocks this site from being framed by another origin (clickjacking).
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Only send the full referrer to our own origin; other sites just get the origin.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Disable browser features this site never uses.
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # Content-Security-Policy — verified locally against this exact page via a
+  # temporary <meta> tag (php -S ignores .htaccess, so that was the only way
+  # to test it without a real Apache host):
+  #   - 'unsafe-eval' is required: the DC runtime (support.js) compiles the
+  #     inline <script type="text/x-dc"> component with `new Function(...)`.
+  #   - unpkg.com serves React/ReactDOM (loaded by support.js).
+  #   - googletagmanager.com/google-analytics.com are the GA4 tag + beacons,
+  #     only ever loaded after cookie consent (assets/consent.js).
+  #   - connect.facebook.net/facebook.com are for the Meta Pixel, currently a
+  #     dormant no-op (empty META_PIXEL_ID in consent.js) but allow-listed so
+  #     turning it on later doesn't also require remembering to touch this file.
+  #   - www.google.com is the Google Maps iframe embed.
+  #   - 'unsafe-inline' on style-src covers the page's remaining inline
+  #     `style="..."` attributes (mostly decorative SVG positioning).
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.facebook.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; frame-src https://www.google.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+</IfModule>

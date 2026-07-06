@@ -22,9 +22,13 @@
 <meta name="theme-color" content="#753B4D">
 <meta name="author" content="NŌMA people">
 <link rel="canonical" href="https://nomapeople.com/plzen/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<!-- Fonts are self-hosted (assets/fonts/) for speed — no third-party font CDN round trip. -->
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/gloock-400-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/gloock-400-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-400-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-400-latin-ext.woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="shortcut icon" href="assets/favicon.svg">
 <meta property="og:locale" content="cs_CZ">
@@ -43,346 +47,482 @@
 <meta name="twitter:title" content="Kontaktní improvizace Plzeň | NŌMA people">
 <meta name="twitter:description" content="Letní série lekcí kontaktní improvizace v Plzni. Vhodné i pro začátečníky, každé pondělí v Pohybovém Ateliéru J7.">
 <meta name="twitter:image" content="https://nomapeople.com/plzen/assets/share-image.png?v=20260615">
-<!-- Cookie consent + analytics loading now lives in the real <head> above
-     (assets/consent.js), not here — see the note there for why. -->
-<style>
-html,body{margin:0;padding:0;background:#F2E9E1;}
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;scroll-padding-top:90px;}
-::selection{background:#A3D1F0;color:#753B4D;}
-input,textarea,button{font-family:inherit;}
-@keyframes v3Drift{0%{transform:translateX(0);}100%{transform:translateX(-80px);}}
-@keyframes v3Breathe{0%,100%{transform:scale(1);opacity:0.85;}50%{transform:scale(1.04);opacity:1;}}
-@keyframes v3Dash{to{stroke-dashoffset:0;}}
-@keyframes nomaFloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-22px) rotate(3deg);}}
-@keyframes nomaFloat2{0%,100%{transform:translateY(-10px) rotate(4deg);}50%{transform:translateY(14px) rotate(-2deg);}}
-@media (max-width:820px){ .np-nav-links{ display:none !important; } }
-</style>
+<!-- Structured data: organizer, the lesson series as an Event, and the visible
+     FAQ (kept verbatim in sync with the FAQ section below — do not let these
+     two drift apart). Helps both classic search rich results and LLM/AI
+     answer engines cite accurate, current facts about the series. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://nomapeople.com/plzen/#website",
+      "url": "https://nomapeople.com/plzen/",
+      "name": "NŌMA people — Kontaktní improvizace Plzeň",
+      "inLanguage": "cs"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://nomapeople.com/plzen/#organization",
+      "name": "NŌMA people",
+      "url": "https://nomapeople.com/plzen/",
+      "sameAs": ["https://www.instagram.com/maya_cz"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://nomapeople.com/plzen/#maya",
+      "name": "Maya",
+      "jobTitle": "Lektorka kontaktní improvizace",
+      "sameAs": ["https://www.instagram.com/maya_cz"]
+    },
+    {
+      "@type": "Event",
+      "@id": "https://nomapeople.com/plzen/#event",
+      "name": "Kontaktní improvizace Plzeň — letní série lekcí 2026",
+      "description": "Letní série lekcí kontaktní improvizace v Plzni. Každé pondělí 18–20 h, vhodné i pro úplné začátečníky.",
+      "startDate": "2026-06-22T18:00:00+02:00",
+      "endDate": "2026-08-31T20:00:00+02:00",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "Pohybový Ateliér J7",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jablonského 7",
+          "addressLocality": "Plzeň",
+          "addressCountry": "CZ"
+        }
+      },
+      "organizer": { "@id": "https://nomapeople.com/plzen/#organization" },
+      "performer": { "@id": "https://nomapeople.com/plzen/#maya" },
+      "offers": {
+        "@type": "Offer",
+        "price": "300",
+        "priceCurrency": "CZK",
+        "availability": "https://schema.org/InStock",
+        "url": "https://nomapeople.com/plzen/#prihlasit"
+      },
+      "image": "https://nomapeople.com/plzen/assets/share-image.png"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://nomapeople.com/plzen/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Musím mít taneční zkušenost?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Vůbec ne. Lekce jsou vhodné pro úplné začátečníky. Jestli umíš chodit, padat nebo se občas o někoho opřít, máš skvělý základ ;-)" }
+        },
+        {
+          "@type": "Question",
+          "name": "Musím přijít s partnerem?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ne. Pracujeme ve dvojici i ve skupině a dvojice si přirozeně tvoříme na místě. Přijď klidně sám/sama." }
+        },
+        {
+          "@type": "Question",
+          "name": "Co si mám vzít na sebe?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Pohodlné oblečení, ideálně s dlouhými rukávy a nohavicemi. Budeme bosky nebo v ponožkách. A vezmi si láhev vody." }
+        },
+        {
+          "@type": "Question",
+          "name": "Musím chodit pravidelně?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Nemusíš. Lekce probíhají každé pondělí 18–20 h od 22. 6. do 31. 8. 2026 a můžeš přijít kdykoliv ti to vyjde — platí se po jednotlivých lekcích." }
+        },
+        {
+          "@type": "Question",
+          "name": "Kdy mám dorazit?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Doraž prosím 15 minut před začátkem, ať se můžeš pomalu naladit, protáhnout a přivítat." }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak se přihlásím a jak platím?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Přihlas se přes formulář na této stránce. Platba je 300 Kč za lekci (2 hodiny) a probíhá na místě před začátkem." }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </helmet>
 
-<div style="font-family:'Montserrat',sans-serif;font-weight:400;color:#753B4D;background:#F2E9E1;overflow-x:hidden;position:relative;">
+<div class="page">
+  <a href="#main-content" class="skip-link">Přeskočit na hlavní obsah</a>
 
   <!-- ===== HEADER ===== -->
-  <header style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,64px);flex-wrap:wrap;gap:2rem;">
-    <a href="#top" style="{{ logoStyle }}">NŌMA<span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:0.55em;letter-spacing:0.22em;margin-left:6px;">people</span><span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.42em;letter-spacing:0.3em;text-transform:uppercase;margin-left:12px;padding-left:12px;border-left:1px solid currentColor;opacity:0.75;">Plzeň</span></a>
-    <nav style="display:flex;gap:clamp(16px,2.4vw,40px);align-items:center;">
-      <span class="np-nav-links" style="display:flex;gap:clamp(16px,2.4vw,40px);align-items:center;">
-        <a href="#o-ci" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">co to je</a>
-        <a href="#info" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">info</a>
-        <a href="#lektorka" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">lektorka</a>
-        <a href="#faq" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">faq</a>
+  <header class="site-header {{ headerThemeClass }}">
+    <a href="#top" class="site-header__brand">NŌMA<span class="site-header__brand-name">people</span><span class="site-header__brand-badge">Plzeň</span></a>
+    <div class="site-header__nav">
+      <nav class="nav-links" aria-label="Hlavní navigace">
+        <a href="#o-ci" class="nav-links__link" data-spy="o-ci" aria-current="{{ activeSection === 'o-ci' }}">co to je</a>
+        <a href="#info" class="nav-links__link" data-spy="info" aria-current="{{ activeSection === 'info' }}">info</a>
+        <a href="#lektorka" class="nav-links__link" data-spy="lektorka" aria-current="{{ activeSection === 'lektorka' }}">lektorka</a>
+        <a href="#faq" class="nav-links__link" data-spy="faq" aria-current="{{ activeSection === 'faq' }}">faq</a>
         <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
-          <a href="admin/" style="{{ navLinkStyle }}" style-hover="border-bottom-color:currentColor !important;">administrace</a>
+          <a href="admin/" class="nav-links__link">administrace</a>
         </sc-if>
-      </span>
-      <a href="#prihlasit" style="{{ navCtaStyle }}" style-hover="background:#753B4D !important;color:#F2E9E1 !important;border-color:#753B4D !important;">přihlásit</a>
-    </nav>
+      </nav>
+      <a href="#prihlasit" class="nav-cta" data-spy="prihlasit" aria-current="{{ activeSection === 'prihlasit' }}">přihlásit</a>
+    </div>
   </header>
 
-  <!-- ===== 1 · HERO ===== -->
-  <section id="top" data-screen-label="Hero" data-nav-theme="light" style="position:relative;min-height:100vh;">
-    <img src="assets/hero.webp" alt="Kontaktní improvizace" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(60,25,38,0.5) 0%,rgba(117,59,77,0.12) 38%,rgba(117,59,77,0.5) 100%);"></div>
-    <svg viewBox="0 0 1200 200" preserveAspectRatio="none" style="position: absolute; left: 0px; right: 0; top: 90vh; width: 100%; height: 120px; opacity: 0.9; transform-origin: center">
-      <path d="M0,120 C150,60 260,160 420,110 C580,60 640,150 820,100 C980,56 1080,140 1200,90" fill="none" stroke="#F2E9E1" stroke-width="1.5" stroke-dasharray="1600" stroke-dashoffset="1600" data-draw-once="1"></path>
-    </svg>
-    <div style="position:absolute;left:0;right:0;bottom:0;padding:0 clamp(20px,5vw,72px) clamp(60px,9vh,110px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:30px;">
-      <div style="max-width:860px;">
-        <p style="color:#F2E9E1;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;margin:0 0 20px;opacity:0.9;">letní série lekcí · Plzeň 2026</p>
-        <h1 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;color:#F2E9E1;font-size:clamp(42px,6.6vw,100px);line-height:1.04;margin:0;text-wrap:balance;">Kontaktní<br><em style="font-style:italic;">improvizace</em></h1>
-        <p style="font-family:'Roxborough CF','Gloock',serif;font-style:italic;color:#A3D1F0;font-size:clamp(20px,2.4vw,32px);margin:18px 0 0;">move. listen. connect.</p>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;">
-        <a href="#prihlasit" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#753B4D;background:#F2E9E1;border:1.5px solid #F2E9E1;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:15px 32px;border-radius:999px;transition:all .3s;" style-hover="background:transparent !important;color:#F2E9E1 !important;">→ přihlásit se na lekci</a>
-        <a href="#o-ci" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#F2E9E1;border:1.5px solid #F2E9E1;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:15px 32px;border-radius:999px;transition:all .3s;" style-hover="background:#F2E9E1 !important;color:#753B4D !important;">co to je?</a>
-      </div>
-    </div>
-  </section>
+  <main id="main-content">
 
-  <!-- ===== 2 · O PRAXI ===== -->
-  <section id="o-ci" data-screen-label="O praxi" style="position:relative;padding:clamp(110px,15vw,200px) clamp(20px,5vw,72px);text-align:center;overflow:hidden;">
-    <svg viewBox="0 0 800 800" style="position:absolute;left:50%;top:50%;width:min(150vw,1500px);height:auto;transform:translate(-50%,-50%);opacity:0.35;animation:v3Breathe 13s ease-in-out infinite;pointer-events:none;overflow:visible;z-index:0;">
-      <g fill="none" stroke="#A3D1F0" stroke-width="1.2">
-        <path d="M420,48 C500,42 570,60 630,105 C665,132 700,168 722,215 C748,270 756,330 742,392 C735,425 745,455 730,490 C700,562 640,618 560,650 C500,674 430,682 362,668 C330,662 305,678 272,666 C190,637 118,580 82,498 C58,443 52,382 66,324 C74,290 60,262 72,228 C98,152 162,95 245,68 C285,55 312,72 352,58 C374,50 398,50 420,48 Z"></path>
-        <path d="M415,102 C480,96 545,115 595,155 C630,183 658,220 675,262 C692,305 710,345 700,392 C692,428 700,462 685,495 C658,556 605,600 538,626 C486,646 428,652 372,640 C342,634 315,646 288,635 C220,608 162,560 132,492 C112,446 108,395 118,348 C126,315 112,288 124,258 C148,196 200,150 268,126 C302,114 330,128 362,116 C380,108 398,104 415,102 Z"></path>
-        <path d="M410,158 C465,152 520,170 562,205 C598,235 622,275 635,318 C645,352 660,385 650,422 C642,452 650,482 636,510 C612,560 566,596 510,617 C466,634 418,638 372,628 C346,622 322,632 298,622 C242,600 195,560 172,505 C155,464 152,422 162,382 C168,355 156,330 168,304 C190,252 234,214 290,194 C318,184 340,196 366,186 C382,172 396,160 410,158 Z"></path>
-        <path d="M406,215 C450,210 495,226 528,255 C558,281 578,315 588,352 C595,378 608,406 598,436 C591,460 597,485 585,508 C566,548 528,576 484,592 C448,606 410,608 373,600 C352,596 332,604 313,596 C270,578 234,546 217,504 C204,472 202,438 210,406 C215,384 205,364 215,343 C233,302 268,272 312,256 C334,248 352,258 372,250 C384,232 395,216 406,215 Z"></path>
-        <path d="M402,272 C436,268 470,281 495,304 C518,325 533,352 540,382 C545,402 556,424 548,448 C542,466 546,486 536,504 C521,534 492,555 458,567 C430,577 402,578 374,572 C358,568 342,574 328,568 C296,554 269,530 257,498 C248,474 246,448 253,424 C257,408 249,392 257,376 C271,345 297,323 330,311 C346,305 360,313 375,307 C384,290 393,273 402,272 Z"></path>
-      </g>
-    </svg>
-    <img src="assets/dancer.webp" alt="" style="position:absolute;left:4%;top:14%;width:clamp(90px,11vw,180px);animation:nomaFloat 8s ease-in-out infinite;opacity:0.85;filter:drop-shadow(0 18px 30px rgba(117,59,77,0.2));">
-    <div style="position:relative;max-width:820px;margin:0 auto;">
-      <p style="font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;margin:0 0 34px;opacity:0.6;">co je kontaktní improvizace?</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(28px,3.6vw,52px);line-height:1.32;margin:0 0 20px;text-wrap:balance;">Bezpečný prostor pro objevování pohybu — bez tlaku na výkon, technickou dokonalost nebo předem dané kroky.</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-style:italic;font-size:clamp(20px,2.6vw,36px);line-height:1.4;margin:0;color:#753B4D;opacity:0.85;">Rozvíjíme vnímání těla, práci s&nbsp;pozorností, oporou, váhou a&nbsp;vzájemnou komunikací skrze pohyb — ve dvojici i ve skupině.</p>
-    </div>
-  </section>
-
-  <!-- ===== 3 · PRO KOHO ===== -->
-  <section data-screen-label="Pro koho" style="position:relative;background:#A3D1F0;padding:clamp(120px,15vw,220px) clamp(20px,5vw,72px) clamp(130px,16vw,220px);overflow:hidden;">
-    <!-- wavy top edge ← cream (previous section) -->
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="position:absolute;left:0;right:0;top:-1px;width:100%;height:clamp(50px,7vw,90px);display:block;pointer-events:none;">
-      <path d="M0,36 C160,74 340,8 540,42 C720,72 880,12 1080,40 C1240,62 1360,26 1440,48 L1440,0 L0,0 Z" fill="#F2E9E1"></path>
-    </svg>
-    <svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: calc(100% + 80px); height: 100%; animation: v3Drift 26s linear infinite alternate; left: -15px; top: 118px">
-      <g fill="none" stroke="#F2E9E1">
-        <path stroke-width="0.5" opacity="0.55" d="M-40,52 C160,128 320,-6 520,64 C700,126 820,10 1010,72 C1180,126 1320,32 1480,94"></path>
-        <path stroke-width="0.5" opacity="0.6" stroke-dasharray="0" d="M-40,232 C180,300 360,170 560,250 C740,322 900,186 1080,266 C1240,336 1360,210 1480,282"></path>
-      </g>
-    </svg>
-    <div style="position:relative;max-width:1100px;margin:0 auto;">
-      <p style="text-align:center;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;margin:0 0 clamp(34px,5vw,56px);opacity:0.65;">pro koho?</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(34px,5vw,76px);line-height:1.12;margin:0;text-align:center;text-wrap:balance;">Vhodné i pro <em style="font-style:italic;">začátečníky</em>.</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-style:italic;font-size:clamp(24px,3.2vw,46px);line-height:1.2;margin:clamp(10px,1.6vw,20px) 0 0;text-align:center;color:#F2E9E1;">Taneční zkušenost není potřeba.</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(19px,2.2vw,30px);line-height:1.55;margin:clamp(40px,5vw,68px) auto 0;max-width:26em;text-align:center;text-wrap:balance;">Jestli umíš <em style="font-style:italic;color:#F2E9E1;">chodit</em>, <em style="font-style:italic;color:#F2E9E1;">padat</em> nebo se občas o někoho <em style="font-style:italic;color:#F2E9E1;">opřít</em>,<br>tak už máš skvělý základ&nbsp;<span style="white-space:nowrap;">;-)</span></p>
-    </div>
-    <!-- wavy bottom edge → cream (next section) -->
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="position:absolute;left:0;right:0;bottom:-1px;width:100%;height:clamp(50px,7vw,90px);display:block;pointer-events:none;">
-      <path d="M0,58 C180,14 360,86 560,52 C740,22 900,84 1100,54 C1260,30 1360,66 1440,44 L1440,90 L0,90 Z" fill="#F2E9E1"></path>
-    </svg>
-  </section>
-
-  <!-- ===== 4 · PRAKTICKÉ INFO ===== -->
-  <section id="info" data-screen-label="Praktické info" style="position:relative;padding:clamp(80px,11vw,150px) clamp(20px,5vw,72px);max-width:1500px;margin:0 auto;overflow:hidden;">
-    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(34px,4vw,58px);position:relative;">
-      <div>
-        <p style="margin:0 0 18px;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;opacity:0.6;">kdy, kde, za kolik</p>
-        <h2 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(40px,5.6vw,88px);margin:0;line-height:0.98;">Praktické <em style="font-style:italic;">info</em></h2>
-      </div>
-      <p style="margin:0;max-width:360px;font-size:15px;line-height:1.65;opacity:0.78;">Lekce probíhají každé pondělí a&nbsp;můžeš přijít, kdykoliv ti to vyjde — platí se po jednotlivých lekcích.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,2.6vw,36px);position:relative;">
-      <div style="display:flex;flex-direction:column;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px) !important;background:#FBF6F0 !important;">
-        <p style="margin:0 0 14px;font-size:11.5px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.6;">kdy</p>
-        <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(28px,2.6vw,40px);margin:0 0 10px;line-height:1.05;">22. 6. – 31. 8. 2026</p>
-        <p style="margin:0;font-size:14.5px;line-height:1.7;opacity:0.85;">každé pondělí · 18–20 h</p>
-      </div>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Jablonsk%C3%A9ho%207%20Plze%C5%88%20Slovany" target="_blank" rel="noopener" style="display:flex;flex-direction:column;text-decoration:none;color:#753B4D;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px) !important;background:#FBF6F0 !important;">
-        <p style="margin:0 0 14px;font-size:11.5px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.6;">kde</p>
-        <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(28px,2.6vw,40px);margin:0 0 10px;line-height:1.05;">Pohybový Ateliér J7</p>
-        <p style="margin:0;font-size:14.5px;line-height:1.7;opacity:0.85;">Jablonského 7, Plzeň 2-Slovany</p>
-        <span style="margin-top:auto;padding-top:16px;font-family:'Roxborough CF','Gloock',serif;font-style:italic;font-size:15px;border-bottom:2px solid #A3D1F0;align-self:flex-start;">otevřít v mapách ↗</span>
-      </a>
-      <div style="display:flex;flex-direction:column;border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,40px) clamp(22px,2.6vw,36px);background:rgba(251,246,240,0.6);transition:transform .35s ease, background .35s ease;" style-hover="transform:translateY(-8px) !important;background:#FBF6F0 !important;">
-        <p style="margin:0 0 14px;font-size:11.5px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.6;">cena</p>
-        <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(28px,2.6vw,40px);margin:0 0 10px;line-height:1.05;">300 Kč</p>
-        <p style="margin:0;font-size:14.5px;line-height:1.7;opacity:0.85;">za lekci · 2 hodiny pohybu · platba na místě</p>
-      </div>
-    </div>
-    <!-- co s sebou -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,2.6vw,36px);margin-top:clamp(20px,2.6vw,36px);position:relative;">
-      <div style="border:1px solid rgba(117,59,77,0.3);border-radius:35px;padding:clamp(26px,3vw,44px);background:rgba(251,246,240,0.6);">
-        <h3 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(24px,2.2vw,34px);margin:0 0 22px;">Co si vzít <em style="font-style:italic;">s&nbsp;sebou</em></h3>
-        <div style="display:flex;flex-direction:column;gap:14px;">
-          <p style="display:flex;gap:14px;align-items:baseline;font-size:15px;line-height:1.6;margin:0;"><span>Budeme bosky nebo v ponožkách.</span></p>
-          <p style="display:flex;gap:14px;align-items:baseline;font-size:15px;line-height:1.6;margin:0;"><span>Pohodlné oblečení, ideálně s&nbsp;<strong style="font-weight:600;">dlouhými rukávy a&nbsp;nohavicemi</strong>.</span></p>
-          <p style="display:flex;gap:14px;align-items:baseline;font-size:15px;line-height:1.6;margin:0;"><span>Láhev vody na doplnění tekutin.</span></p>
+    <!-- ===== 1 · HERO ===== -->
+    <section id="top" data-screen-label="Hero" data-nav-theme="light" class="hero">
+      <img src="assets/hero.webp" alt="Dvojice tančí kontaktní improvizaci venku, opírají se jeden o druhého" class="hero__media">
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <svg class="hero__wave" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,120 C150,60 260,160 420,110 C580,60 640,150 820,100 C980,56 1080,140 1200,90" fill="none" stroke="#F2E9E1" stroke-width="1.5" stroke-dasharray="1600" stroke-dashoffset="1600" data-draw-once="1"></path>
+      </svg>
+      <div class="hero__content">
+        <div class="hero__intro">
+          <p class="hero__eyebrow">letní série lekcí · Plzeň 2026</p>
+          <h1 class="hero__title">Kontaktní<br><em>improvizace</em></h1>
+          <p class="hero__tagline">move. listen. connect.</p>
+        </div>
+        <div class="hero__actions">
+          <a href="#prihlasit" class="btn btn--on-hero">→ přihlásit se na lekci</a>
+          <a href="#o-ci" class="btn btn--outline-cream">co to je?</a>
         </div>
       </div>
-      <div style="border-radius:35px;padding:clamp(26px,3vw,44px);background:#753B4D;color:#F2E9E1;display:flex;flex-direction:column;justify-content:center;gap:10px;">
-        <p style="font-family:'Roxborough CF','Gloock',serif;font-style:italic;font-size:clamp(44px,4vw,64px);line-height:1;margin:0;color:#A3D1F0;">15′</p>
-        <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(20px,1.8vw,26px);margin:0;">Doraž 15&nbsp;minut před začátkem</p>
-        <p style="font-size:14.5px;line-height:1.65;margin:0;opacity:0.85;">Ať se můžeš pomalu naladit, protáhnout a&nbsp;přivítat.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== 5 · LEKTORKA (dark) ===== -->
-  <section id="lektorka" data-screen-label="Lektorka" data-nav-theme="light" style="background:#753B4D;color:#F2E9E1;padding:clamp(80px,10vw,150px) clamp(20px,5vw,72px);position:relative;overflow:hidden;">
-    <svg viewBox="0 0 1200 160" preserveAspectRatio="none" style="position:absolute;left:0;top:30px;width:100%;height:110px;opacity:0.28;pointer-events:none;">
-      <path d="M0,100 C180,40 340,140 560,84 C780,30 940,130 1200,70" fill="none" stroke="#A3D1F0" stroke-width="1.4" stroke-dasharray="1900" stroke-dashoffset="1900" data-draw-once="1"></path>
-    </svg>
-    <img src="assets/dancer.webp" alt="" style="position:absolute;right:clamp(-30px,-1vw,0px);bottom:4%;width:clamp(110px,14vw,240px);animation:nomaFloat2 9s ease-in-out infinite;opacity:0.35;filter:invert(1);">
-    <div style="max-width:1200px;margin:0 auto;position:relative;">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(26px,4vw,60px);align-items:center;">
-        <div style="position:relative;padding:clamp(20px,3vw,40px) 0 clamp(40px,5vw,70px);">
-          <div style="position:relative;max-width:460px;">
-            <img src="uploads/maya.webp" alt="Maya — lektorka NŌMA people" style="width: 100%; height: auto; display: block; border-radius: 35px">
-            <p aria-hidden="true" style="position: absolute; left: clamp(-24px,-3vw,-10px); bottom: clamp(-38px,-4vw,-20px); margin: 0; font-family: 'Roxborough CF','Gloock',serif; font-style: italic; font-weight: 400; font-size: clamp(84px,11vw,160px); line-height: 1; color: #F2E9E1; pointer-events: none">Maya</p>
+    <!-- ===== 2 · O PRAXI ===== -->
+    <section id="o-ci" data-screen-label="O praxi" class="section section--center practice">
+      <svg class="blob-lines" viewBox="0 0 800 800" aria-hidden="true">
+        <g fill="none" stroke="#A3D1F0" stroke-width="1.2">
+          <path d="M420,48 C500,42 570,60 630,105 C665,132 700,168 722,215 C748,270 756,330 742,392 C735,425 745,455 730,490 C700,562 640,618 560,650 C500,674 430,682 362,668 C330,662 305,678 272,666 C190,637 118,580 82,498 C58,443 52,382 66,324 C74,290 60,262 72,228 C98,152 162,95 245,68 C285,55 312,72 352,58 C374,50 398,50 420,48 Z"></path>
+          <path d="M415,102 C480,96 545,115 595,155 C630,183 658,220 675,262 C692,305 710,345 700,392 C692,428 700,462 685,495 C658,556 605,600 538,626 C486,646 428,652 372,640 C342,634 315,646 288,635 C220,608 162,560 132,492 C112,446 108,395 118,348 C126,315 112,288 124,258 C148,196 200,150 268,126 C302,114 330,128 362,116 C380,108 398,104 415,102 Z"></path>
+          <path d="M410,158 C465,152 520,170 562,205 C598,235 622,275 635,318 C645,352 660,385 650,422 C642,452 650,482 636,510 C612,560 566,596 510,617 C466,634 418,638 372,628 C346,622 322,632 298,622 C242,600 195,560 172,505 C155,464 152,422 162,382 C168,355 156,330 168,304 C190,252 234,214 290,194 C318,184 340,196 366,186 C382,172 396,160 410,158 Z"></path>
+          <path d="M406,215 C450,210 495,226 528,255 C558,281 578,315 588,352 C595,378 608,406 598,436 C591,460 597,485 585,508 C566,548 528,576 484,592 C448,606 410,608 373,600 C352,596 332,604 313,596 C270,578 234,546 217,504 C204,472 202,438 210,406 C215,384 205,364 215,343 C233,302 268,272 312,256 C334,248 352,258 372,250 C384,232 395,216 406,215 Z"></path>
+          <path d="M402,272 C436,268 470,281 495,304 C518,325 533,352 540,382 C545,402 556,424 548,448 C542,466 546,486 536,504 C521,534 492,555 458,567 C430,577 402,578 374,572 C358,568 342,574 328,568 C296,554 269,530 257,498 C248,474 246,448 253,424 C257,408 249,392 257,376 C271,345 297,323 330,311 C346,305 360,313 375,307 C384,290 393,273 402,272 Z"></path>
+        </g>
+      </svg>
+      <img src="assets/dancer.webp" alt="" aria-hidden="true" class="decor-dancer decor-dancer--float-a" style="left:4%;top:14%;width:clamp(90px,11vw,180px);opacity:.85;filter:drop-shadow(0 18px 30px rgba(117,59,77,.2));">
+      <div class="practice__content">
+        <p class="eyebrow">co je kontaktní improvizace?</p>
+        <h2 class="practice__heading">Bezpečný prostor pro objevování pohybu — bez tlaku na výkon, technickou dokonalost nebo předem dané kroky.</h2>
+        <p class="practice__note">Rozvíjíme vnímání těla, práci s&nbsp;pozorností, oporou, váhou a&nbsp;vzájemnou komunikací skrze pohyb — ve dvojici i ve skupině.</p>
+      </div>
+    </section>
+
+    <!-- ===== 3 · PRO KOHO ===== -->
+    <section data-screen-label="Pro koho" class="section section--band section--blue">
+      <svg class="wave-divider wave-divider--top" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,36 C160,74 340,8 540,42 C720,72 880,12 1080,40 C1240,62 1360,26 1440,48 L1440,0 L0,0 Z" fill="#F2E9E1"></path>
+      </svg>
+      <svg class="organic-lines" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="top:118px;">
+        <g fill="none" stroke="#F2E9E1">
+          <path stroke-width="0.5" opacity="0.55" d="M-40,52 C160,128 320,-6 520,64 C700,126 820,10 1010,72 C1180,126 1320,32 1480,94"></path>
+          <path stroke-width="0.5" opacity="0.6" d="M-40,232 C180,300 360,170 560,250 C740,322 900,186 1080,266 C1240,336 1360,210 1480,282"></path>
+        </g>
+      </svg>
+      <div class="audience__content">
+        <p class="eyebrow eyebrow--on-blue">pro koho?</p>
+        <h2 class="audience__heading">Vhodné i pro <em>začátečníky</em>.</h2>
+        <p class="audience__subheading">Taneční zkušenost není potřeba.</p>
+        <p class="audience__body">Jestli umíš <em>chodit</em>, <em>padat</em> nebo se občas o někoho <em>opřít</em>,<br>tak už máš skvělý základ&nbsp;<span style="white-space:nowrap;">;-)</span></p>
+      </div>
+      <svg class="wave-divider wave-divider--bottom" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,58 C180,14 360,86 560,52 C740,22 900,84 1100,54 C1260,30 1360,66 1440,44 L1440,90 L0,90 Z" fill="#F2E9E1"></path>
+      </svg>
+    </section>
+
+    <!-- ===== 4 · PRAKTICKÉ INFO ===== -->
+    <section id="info" data-screen-label="Praktické info" class="section section--wide">
+      <div class="info__header">
+        <div>
+          <p class="eyebrow" style="margin-bottom:18px;">kdy, kde, za kolik</p>
+          <h2 class="info__heading">Praktické <em>info</em></h2>
+        </div>
+        <p class="info__intro">Lekce probíhají každé pondělí a&nbsp;můžeš přijít, kdykoliv ti to vyjde — platí se po jednotlivých lekcích.</p>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <p class="info-card__label">kdy</p>
+          <p class="info-card__value">22. 6. – 31. 8. 2026</p>
+          <p class="info-card__meta">každé pondělí · 18–20 h</p>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Jablonsk%C3%A9ho%207%20Plze%C5%88%20Slovany" target="_blank" rel="noopener" class="info-card">
+          <p class="info-card__label">kde</p>
+          <p class="info-card__value">Pohybový Ateliér J7</p>
+          <p class="info-card__meta">Jablonského 7, Plzeň 2-Slovany</p>
+          <span class="info-card__cta">otevřít v mapách ↗</span>
+        </a>
+        <div class="info-card">
+          <p class="info-card__label">cena</p>
+          <p class="info-card__value">300 Kč</p>
+          <p class="info-card__meta">za lekci · 2 hodiny pohybu · platba na místě</p>
+        </div>
+      </div>
+      <div class="prep-grid">
+        <div class="prep-card">
+          <h3 class="prep-card__title">Co si vzít <em>s&nbsp;sebou</em></h3>
+          <ul class="prep-list">
+            <li class="prep-list__item">Budeme bosky nebo v ponožkách.</li>
+            <li class="prep-list__item">Pohodlné oblečení, ideálně s&nbsp;<strong>dlouhými rukávy a&nbsp;nohavicemi</strong>.</li>
+            <li class="prep-list__item">Láhev vody na doplnění tekutin.</li>
+          </ul>
+        </div>
+        <div class="prep-card prep-card--highlight">
+          <p class="prep-card__figure">15′</p>
+          <p class="prep-card__heading">Doraž 15&nbsp;minut před začátkem</p>
+          <p class="prep-card__note">Ať se můžeš pomalu naladit, protáhnout a&nbsp;přivítat.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5 · LEKTORKA (dark) ===== -->
+    <section id="lektorka" data-screen-label="Lektorka" data-nav-theme="light" class="section section--dark">
+      <svg viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:30px;width:100%;height:110px;opacity:0.28;pointer-events:none;">
+        <path d="M0,100 C180,40 340,140 560,84 C780,30 940,130 1200,70" fill="none" stroke="#A3D1F0" stroke-width="1.4" stroke-dasharray="1900" stroke-dashoffset="1900" data-draw-once="1"></path>
+      </svg>
+      <img src="assets/dancer.webp" alt="" aria-hidden="true" class="decor-dancer decor-dancer--float-b" style="right:clamp(-30px,-1vw,0px);bottom:4%;width:clamp(110px,14vw,240px);opacity:.35;filter:invert(1);">
+      <div class="teacher__grid">
+        <div class="teacher__portrait-col">
+          <div class="teacher__portrait">
+            <img src="uploads/maya.webp" alt="Maya, lektorka NŌMA people, usmívá se venku při pohybu" class="teacher__portrait-image">
+            <p aria-hidden="true" class="teacher__portrait-caption">Maya</p>
           </div>
         </div>
         <div>
-          <p style="margin:0 0 18px;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;color:#A3D1F0;">KDO PROVÁZÍ</p>
-          <p style="font-family:'Roxborough CF','Gloock',serif;font-style:italic;font-size:clamp(26px,2.8vw,42px);line-height:1.3;margin:0 0 26px;color:#A3D1F0;">„Od výkonu k&nbsp;prožitku — k&nbsp;tělu, které se učí zpomalit, vnímat a&nbsp;hrát si.“</p>
-          <p style="font-size:15.5px;line-height:1.75;margin:0 0 12px;opacity:0.9;">Ahoj, jsem tanečnice, lektorka a&nbsp;vizuální umělkyně, propojuji pohyb s&nbsp;tvorbou a&nbsp;estetikou :) Můj pohybový jazyk vychází ze <strong style="font-weight:600;color:#A3D1F0;">street dance</strong>, ale postupně jsem se přesunula i k&nbsp;contemporary, dancehallu a&nbsp;africkým stylům. Založila jsem dvě taneční skupiny, působila v profesionálním uskupení Dance2xs a&nbsp;tvořila site-specific představení, v nichž se propojovaly různé tvůrčí světy a&nbsp;taneční scéna mého rodného města Plzně.</p>
-          <p style="font-size:15.5px;line-height:1.75;margin:0 0 12px;opacity:0.9;">V posledních letech se ale moje cesta víc otáčí dovnitř. Hledám udržitelnější způsob, jak být v pohybu i v životě.</p>
-          <p style="font-size:15.5px;line-height:1.75;margin:0 0 26px;opacity:0.9;">Kontaktní improvizaci jsem objevila úplnou náhodou na severu Thajska. Tam jsem se zamilovala a&nbsp;pokračovala své učení po asijských zemích. Nacházela různé komunity a&nbsp;každý svým způsobem obohatil mé vnímání kontaktní improvizace, pohybu i tance. Pořád jsem v procesu učení, a&nbsp;možná právě to mě na tom baví nejvíc. <em style="font-style:italic;color:#A3D1F0;">Tak pojďme objevovat spolu :)</em></p>
-          <a href="https://www.instagram.com/maya_cz" target="_blank" rel="noopener" class="scp3" style="display:inline-flex;text-decoration:none;color:#F2E9E1;border:2px solid rgba(242,233,225,0.7);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 28px;border-radius:999px;transition:all .25s;" style-hover="background:#F2E9E1;color:#753B4D;">@maya_cz na Instagramu ↗</a>
+          <p class="eyebrow eyebrow--on-dark" style="margin-bottom:18px;">KDO PROVÁZÍ</p>
+          <h2 class="sr-only">Lektorka Maya</h2>
+          <blockquote class="teacher__quote">
+            <p style="margin:0;">„Od výkonu k&nbsp;prožitku — k&nbsp;tělu, které se učí zpomalit, vnímat a&nbsp;hrát si.“</p>
+          </blockquote>
+          <p class="teacher__bio">Ahoj, jsem tanečnice, lektorka a&nbsp;vizuální umělkyně, propojuji pohyb s&nbsp;tvorbou a&nbsp;estetikou :) Můj pohybový jazyk vychází ze <strong>street dance</strong>, ale postupně jsem se přesunula i k&nbsp;contemporary, dancehallu a&nbsp;africkým stylům. Založila jsem dvě taneční skupiny, působila v profesionálním uskupení Dance2xs a&nbsp;tvořila site-specific představení, v nichž se propojovaly různé tvůrčí světy a&nbsp;taneční scéna mého rodného města Plzně.</p>
+          <p class="teacher__bio">V posledních letech se ale moje cesta víc otáčí dovnitř. Hledám udržitelnější způsob, jak být v pohybu i v životě.</p>
+          <p class="teacher__bio" style="margin-bottom:26px;">Kontaktní improvizaci jsem objevila úplnou náhodou na severu Thajska. Tam jsem se zamilovala a&nbsp;pokračovala své učení po asijských zemích. Nacházela různé komunity a&nbsp;každý svým způsobem obohatil mé vnímání kontaktní improvizace, pohybu i tance. Pořád jsem v procesu učení, a&nbsp;možná právě to mě na tom baví nejvíc. <em>Tak pojďme objevovat spolu :)</em></p>
+          <a href="https://www.instagram.com/maya_cz" target="_blank" rel="noopener" class="social-link">@maya_cz na Instagramu ↗</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== 6 · O NŌMA (blue band) ===== -->
-  <section data-screen-label="O NŌMA" style="position:relative;background:#A3D1F0;padding:clamp(120px,15vw,210px) clamp(20px,5vw,72px) clamp(130px,16vw,220px);overflow:hidden;">
-    <!-- wavy top edge ← wine (lektorka) -->
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="position:absolute;left:0;right:0;top:-1px;width:100%;height:clamp(50px,7vw,90px);display:block;pointer-events:none;">
-      <path d="M0,36 C160,74 340,8 540,42 C720,72 880,12 1080,40 C1240,62 1360,26 1440,48 L1440,0 L0,0 Z" fill="#753B4D"></path>
-    </svg>
-    <!-- two white organic lines -->
-    <svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:calc(100% + 80px);height:100%;animation:v3Drift 30s linear infinite alternate-reverse;">
-      <g fill="none" stroke="#F2E9E1">
-        <path stroke-width="0.5" opacity="0.7" d="M-40,120 C140,44 320,178 500,96 C670,20 790,168 970,108 C1150,50 1320,182 1480,110"></path>
-        <path stroke-width="0.5" opacity="0.5" stroke-dasharray="0" d="M-40,300 C180,362 360,238 560,312 C740,378 900,246 1080,322 C1240,386 1360,262 1480,330"></path>
-      </g>
-    </svg>
-    <div style="position:relative;max-width:1000px;margin:0 auto;">
-      <p style="text-align:center;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;margin:0 0 clamp(34px,5vw,56px);opacity:0.65;color:#753B4D;">o projektu</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(24px,3vw,44px);line-height:1.25;margin:0;color:#753B4D;text-align:center;text-wrap:balance;">Kontaktní improvizace Plzeň je součást projektu</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-style:italic;font-size:clamp(40px,5.6vw,84px);line-height:1.05;margin:clamp(10px,1.6vw,20px) 0 0;text-align:center;color:#753B4D;">NŌMA people</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(19px,2.2vw,30px);line-height:1.5;margin:clamp(36px,5vw,60px) auto 0;max-width:22em;text-align:center;color:#753B4D;text-wrap:balance;">— komunity kolem <em style="font-style: italic">pohybu</em>, <em style="font-style: italic">doteku</em> a&nbsp;vzájemného <em style="font-style: italic">propojení</em>.</p>
-      <p style="font-family:'Roxborough CF','Gloock',serif;font-style:italic;font-size:clamp(20px,2.2vw,32px);color:#F2E9E1;margin:clamp(24px,3vw,40px) 0 0;text-align:center;letter-spacing:0.04em;">move. meet. melt.</p>
-    </div>
-    <!-- wavy bottom edge → cream (FAQ) -->
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="position:absolute;left:0;right:0;bottom:-1px;width:100%;height:clamp(50px,7vw,90px);display:block;pointer-events:none;">
-      <path d="M0,58 C180,14 360,86 560,52 C740,22 900,84 1100,54 C1260,30 1360,66 1440,44 L1440,90 L0,90 Z" fill="#F2E9E1"></path>
-    </svg>
-  </section>
-
-  <!-- ===== 7 · FAQ ===== -->
-  <section id="faq" data-screen-label="FAQ" style="position:relative;padding:clamp(80px,11vw,150px) clamp(20px,5vw,72px);max-width:980px;margin:0 auto;overflow:hidden;">
-    <div style="margin-bottom:clamp(30px,4vw,50px);position:relative;">
-      <p style="margin:0 0 18px;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;opacity:0.6;">časté otázky</p>
-      <h2 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(40px,5.6vw,88px);margin:0;line-height:0.98;">FAQ</h2>
-    </div>
-    <div style="display:flex;flex-direction:column;position:relative;">
-      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
-        <div style="{{ f.rowStyle }}">
-          <button onClick="{{ f.toggle }}" style="width:100%;display:flex;align-items:baseline;gap:clamp(14px,2vw,26px);text-align:left;background:transparent;border:none;cursor:pointer;padding:clamp(16px,2vw,24px) clamp(4px,1vw,16px);color:#753B4D;">
-            <span style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(20px,2.4vw,32px);line-height:1.15;flex:1;">{{ f.q }}</span>
-            <span style="{{ f.glyphStyle }}">{{ f.icon }}</span>
-          </button>
-          <div style="{{ f.revealStyle }}">
-            <p style="margin:0;padding:0 clamp(4px,1vw,16px) 24px clamp(34px,4vw,58px);font-size:15px;line-height:1.75;max-width:640px;">{{ f.a }}</p>
-          </div>
-        </div>
-      </sc-for>
-    </div>
-  </section>
-
-  <!-- ===== 8 · MAPA ===== -->
-  <section data-screen-label="Mapa" style="padding:0 clamp(20px,5vw,72px) clamp(80px,11vw,150px);max-width:1500px;margin:0 auto;">
-    <div style="border:1px solid rgba(117,59,77,0.3);border-radius:35px;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));background:rgba(251,246,240,0.6);">
-      <div style="padding:clamp(30px,4vw,56px);">
-        <p style="margin:0 0 18px;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;opacity:0.6;">kudy k&nbsp;nám</p>
-        <h2 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(30px,3.4vw,50px);margin:0 0 18px;line-height:1.02;">Pohybový <em style="font-style:italic;">Ateliér J7</em></h2>
-        <p style="font-size:16px;line-height:1.6;margin:0 0 28px;opacity:0.85;">Jablonského 7<br>Plzeň 2-Slovany</p>
-        <a href="https://maps.app.goo.gl/2jgrgNA5pZqYYGGV9" target="_blank" rel="noopener" class="scp1" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#753B4D;border:1.5px solid #753B4D;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:14px 30px;border-radius:999px;transition:all .3s;" style-hover="background:#753B4D;color:#F2E9E1;">otevřít v mapách →</a>
+    <!-- ===== 6 · O NŌMA (blue band) ===== -->
+    <section data-screen-label="O NŌMA" class="section section--band section--blue">
+      <svg class="wave-divider wave-divider--top" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,36 C160,74 340,8 540,42 C720,72 880,12 1080,40 C1240,62 1360,26 1440,48 L1440,0 L0,0 Z" fill="#753B4D"></path>
+      </svg>
+      <svg class="organic-lines organic-lines--reverse" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="#F2E9E1">
+          <path stroke-width="0.5" opacity="0.7" d="M-40,120 C140,44 320,178 500,96 C670,20 790,168 970,108 C1150,50 1320,182 1480,110"></path>
+          <path stroke-width="0.5" opacity="0.5" d="M-40,300 C180,362 360,238 560,312 C740,378 900,246 1080,322 C1240,386 1360,262 1480,330"></path>
+        </g>
+      </svg>
+      <div class="about-project__content">
+        <p class="eyebrow eyebrow--on-blue">o projektu</p>
+        <h2 class="about-project__heading">Kontaktní improvizace Plzeň je součást projektu <strong>NŌMA people</strong></h2>
+        <p class="about-project__body">— komunity kolem <em>pohybu</em>, <em>doteku</em> a&nbsp;vzájemného <em>propojení</em>.</p>
+        <p class="about-project__motto">move. meet. melt.</p>
       </div>
-      <div style="position:relative;min-height:300px;background:#A3D1F0;">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2578.4742694731717!2d13.387510312379383!3d49.7395194381776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470af1df23155cbb%3A0x232fee36afbf88da!2zUG9oeWJvdsO9IGF0ZWxpw6lyIEo3!5e0!3m2!1sen!2scz!4v1783012360472!5m2!1sen!2scz" width="100%" height="100%" style="border:0;position:absolute;inset:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      </div>
-    </div>
-  </section>
+      <svg class="wave-divider wave-divider--bottom" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,58 C180,14 360,86 560,52 C740,22 900,84 1100,54 C1260,30 1360,66 1440,44 L1440,90 L0,90 Z" fill="#F2E9E1"></path>
+      </svg>
+    </section>
 
-  <!-- ===== 9 · PŘIHLÁŠENÍ (dark) ===== -->
-  <section id="prihlasit" data-screen-label="Přihlášení" data-nav-theme="light" style="background:#753B4D;color:#F2E9E1;padding:clamp(80px,10vw,150px) clamp(20px,5vw,72px);position:relative;overflow:hidden;">
-    <svg viewBox="0 0 1440 160" preserveAspectRatio="none" style="position:absolute;left:0;top:24px;width:100%;height:120px;opacity:0.3;pointer-events:none;">
-      <path d="M0,90 C240,20 420,150 680,80 C900,20 1080,140 1440,70" fill="none" stroke="#A3D1F0" stroke-width="1.5" stroke-dasharray="2200" stroke-dashoffset="2200" data-draw-once="1"></path>
-    </svg>
-    <img src="assets/dancer.webp" alt="" style="position:absolute;left:clamp(-20px,0vw,10px);bottom:2%;width:clamp(100px,12vw,210px);animation:nomaFloat2 8s ease-in-out infinite;opacity:0.25;filter:invert(1);">
-    <div style="max-width:760px;margin:0 auto;position:relative;">
-      <div style="text-align:center;margin-bottom:clamp(30px,4vw,48px);">
-        <p style="margin:0 0 18px;font-size:12.5px;letter-spacing:0.34em;text-transform:uppercase;color:#A3D1F0;">přidej se</p>
-        <h2 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:clamp(38px,5vw,76px);margin:0 0 16px;line-height:0.98;">Přihlas se <em style="font-style:italic;">na lekci</em></h2>
-        <p style="font-size:15px;line-height:1.7;opacity:0.85;max-width:30em;margin:0 auto;">Vyplň pár údajů a&nbsp;ozveme se ti s&nbsp;potvrzením. Platba 300 Kč proběhne na místě před lekcí.</p>
+    <!-- ===== 7 · FAQ ===== -->
+    <section id="faq" data-screen-label="FAQ" class="section section--narrow">
+      <div style="margin-bottom:clamp(30px,4vw,50px);position:relative;">
+        <p class="eyebrow" style="margin-bottom:18px;">časté otázky</p>
+        <h2 class="info__heading">FAQ</h2>
       </div>
-
-      <sc-if value="{{ showInline }}" hint-placeholder-val="{{ true }}">
-        <div style="background:#F2E9E1;color:#753B4D;border-radius:35px;padding:clamp(26px,4vw,48px);box-shadow:0 30px 70px -30px rgba(0,0,0,0.5);">
-          <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
-            <div style="text-align:center;padding:24px 8px;">
-              <p style="font-family:'Roxborough CF','Gloock',serif;font-style:italic;font-size:56px;color:#A3D1F0;line-height:1;margin:0;">✓</p>
-              <h3 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:30px;margin:14px 0 10px;">Díky, jsi v <em style="font-style:italic;">hře!</em></h3>
-              <p style="font-size:15px;line-height:1.65;max-width:26em;margin:0 auto;opacity:0.85;">Ozveme se ti na e-mail s&nbsp;potvrzením. Těšíme se na tebe v Pohybovém Ateliéru J7 — nezapomeň dorazit 15 minut předem.</p>
-              <button onClick="{{ resetForm }}" style="margin-top:24px;background:transparent;border:1.5px solid #753B4D;color:#753B4D;font-size:13px;letter-spacing:0.16em;text-transform:lowercase;padding:13px 28px;border-radius:999px;cursor:pointer;transition:all .3s;" style-hover="background:#753B4D;color:#F2E9E1;">přihlásit dalšího</button>
-            </div>
-          </sc-if>
-          <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
-            <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:18px;">
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;">
-                <label style="display:flex;flex-direction:column;gap:8px;">
-                  <span style="font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;">Jméno a&nbsp;příjmení *</span>
-                  <input ref="{{ nameRef }}" type="text" placeholder="Jana Nováková" style="background:#FBF6F0;border:1.5px solid rgba(117,59,77,0.3);border-radius:999px;padding:14px 22px;font-size:15px;color:#753B4D;outline:none;" style-focus="border-color:#753B4D;">
-                </label>
-                <label style="display:flex;flex-direction:column;gap:8px;">
-                  <span style="font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;">Telefon</span>
-                  <input ref="{{ phoneRef }}" type="tel" placeholder="+420 …" style="background:#FBF6F0;border:1.5px solid rgba(117,59,77,0.3);border-radius:999px;padding:14px 22px;font-size:15px;color:#753B4D;outline:none;" style-focus="border-color:#753B4D;">
-                </label>
+      <div class="faq-list">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div class="{{ f.itemClass }}">
+            <h3 class="faq-item__heading">
+              <button type="button" onClick="{{ f.toggle }}" class="faq-item__question" id="faq-question-{{ f.n }}" aria-expanded="{{ f.open }}" aria-controls="faq-panel-{{ f.n }}">
+                <span class="faq-item__question-text">{{ f.q }}</span>
+                <span class="faq-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-item__answer-wrap">
+              <div class="faq-item__answer-inner">
+                <div id="faq-panel-{{ f.n }}" role="region" aria-labelledby="faq-question-{{ f.n }}">
+                  <p class="faq-item__answer">{{ f.a }}</p>
+                </div>
               </div>
-              <label style="display:flex;flex-direction:column;gap:8px;">
-                <span style="font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;">E-mail *</span>
-                <input ref="{{ emailRef }}" type="email" placeholder="jana@email.cz" style="background:#FBF6F0;border:1.5px solid rgba(117,59,77,0.3);border-radius:999px;padding:14px 22px;font-size:15px;color:#753B4D;outline:none;" style-focus="border-color:#753B4D;">
-              </label>
-              <label style="display:flex;flex-direction:column;gap:8px;">
-                <span style="font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;">Poznámka</span>
-                <textarea ref="{{ noteRef }}" rows="3" placeholder="Cokoliv nám chceš dát vědět (termín, zkušenosti…)" style="background:#FBF6F0;border:1.5px solid rgba(117,59,77,0.3);border-radius:24px;padding:14px 22px;font-size:15px;color:#753B4D;outline:none;resize:vertical;font-family:'Montserrat',sans-serif;" style-focus="border-color:#753B4D;"></textarea>
-              </label>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
 
-              <label style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;background:#FBF6F0;border:1.5px solid rgba(117,59,77,0.25);border-radius:24px;padding:14px 18px;">
-                <input ref="{{ gdprRef }}" type="checkbox" style="flex:none;width:20px;height:20px;margin-top:2px;accent-color:#753B4D;">
-                <span style="font-size:12.5px;line-height:1.55;opacity:0.9;"><strong style="font-weight:600;">Souhlas se zpracováním údajů *</strong> — souhlasím se zpracováním osobních údajů (jméno, e-mail, telefon) správcem NŌMA People pro účely registrace a&nbsp;organizační komunikace. Údaje uchováváme max. 6 měsíců od akce a&nbsp;nesdílíme je mimo nezbytné služby. Souhlas lze kdykoli odvolat. Více v&nbsp;<a href="zasady-ochrany-osobnich-udaju.html" target="_blank" rel="noopener" style="color:#753B4D;text-decoration:underline;">Zásadách ochrany osobních údajů</a>.</span>
-              </label>
-              <label style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;background:#FBF6F0;border:1.5px solid rgba(117,59,77,0.25);border-radius:24px;padding:14px 18px;">
-                <input ref="{{ photoRef }}" type="checkbox" style="flex:none;width:20px;height:20px;margin-top:2px;accent-color:#753B4D;">
-                <span style="font-size:12.5px;line-height:1.55;opacity:0.9;"><strong style="font-weight:600;">Souhlas s&nbsp;foto/video</strong> — souhlasím s&nbsp;pořízením a&nbsp;užitím atmosférických foto/video záběrů z akce pro komunikaci NŌMA. Vím, že mohu u vstupu požádat o označení „NO PHOTO" a&nbsp;o odstranění své podoby.</span>
-              </label>
-
-              <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
-                <div style="background:#fbe3e3;color:#9a2b2b;border-radius:18px;padding:12px 18px;font-size:14px;font-weight:600;">{{ formError }}</div>
-              </sc-if>
-
-              <button type="submit" disabled="{{ submitting }}" style="background:#753B4D;color:#F2E9E1;font-size:14px;letter-spacing:0.16em;text-transform:lowercase;font-weight:500;padding:18px;border:none;border-radius:999px;cursor:pointer;margin-top:4px;transition:all .3s;opacity:{{ submitOpacity }};" style-hover="background:#5e2f3e;transform:translateY(-2px);">{{ submitLabel }}</button>
-              <p style="font-size:12px;text-align:center;margin:0;opacity:0.6;">* povinné pole</p>
-            </form>
-          </sc-if>
+    <!-- ===== 8 · MAPA ===== -->
+    <section data-screen-label="Mapa" class="section section--wide" style="padding-top:0;">
+      <div class="map-card">
+        <div class="map-card__info">
+          <p class="eyebrow" style="margin-bottom:18px;">kudy k&nbsp;nám</p>
+          <h2 class="map-card__heading">Pohybový <em>Ateliér J7</em></h2>
+          <p class="map-card__address">Jablonského 7<br>Plzeň 2-Slovany</p>
+          <a href="https://maps.app.goo.gl/2jgrgNA5pZqYYGGV9" target="_blank" rel="noopener" class="btn btn--outline-wine">otevřít v mapách →</a>
         </div>
-      </sc-if>
-
-      <sc-if value="{{ showGoogle }}" hint-placeholder-val="{{ false }}">
-        <div style="background:#F2E9E1;color:#753B4D;border-radius:35px;padding:clamp(32px,5vw,52px);text-align:center;box-shadow:0 30px 70px -30px rgba(0,0,0,0.5);">
-          <p style="font-family:'Roxborough CF','Gloock',serif;font-style:italic;font-size:48px;color:#A3D1F0;line-height:1;margin:0;">↗</p>
-          <h3 style="font-family:'Roxborough CF','Gloock',serif;font-weight:400;font-size:28px;margin:12px 0 10px;">Přihlášení přes formulář</h3>
-          <p style="font-size:15px;line-height:1.6;max-width:26em;margin:0 auto 26px;opacity:0.85;">Klikni na tlačítko a&nbsp;vyplň krátký přihlašovací formulář. Otevře se v novém okně.</p>
-          <a href="{{ googleUrl }}" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;background:#753B4D;color:#F2E9E1;font-size:14px;letter-spacing:0.16em;text-transform:lowercase;padding:17px 36px;border-radius:999px;transition:all .3s;" style-hover="background:#5e2f3e;">otevřít přihlašovací formulář →</a>
+        <div class="map-card__embed">
+          <iframe class="map-card__iframe" title="Mapa – Pohybový Ateliér J7, Jablonského 7, Plzeň" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2578.4742694731717!2d13.387510312379383!3d49.7395194381776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470af1df23155cbb%3A0x232fee36afbf88da!2zUG9oeWJvdsO9IGF0ZWxpw6lyIEo3!5e0!3m2!1sen!2scz!4v1783012360472!5m2!1sen!2scz" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
-      </sc-if>
-    </div>
-  </section>
+      </div>
+    </section>
+
+    <!-- ===== 9 · PŘIHLÁŠENÍ (dark) ===== -->
+    <section id="prihlasit" data-screen-label="Přihlášení" data-nav-theme="light" class="section section--dark">
+      <svg viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:24px;width:100%;height:120px;opacity:0.3;pointer-events:none;">
+        <path d="M0,90 C240,20 420,150 680,80 C900,20 1080,140 1440,70" fill="none" stroke="#A3D1F0" stroke-width="1.5" stroke-dasharray="2200" stroke-dashoffset="2200" data-draw-once="1"></path>
+      </svg>
+      <img src="assets/dancer.webp" alt="" aria-hidden="true" class="decor-dancer decor-dancer--float-b" style="left:clamp(-20px,0vw,10px);bottom:2%;width:clamp(100px,12vw,210px);opacity:.25;filter:invert(1);">
+      <div style="max-width:760px;margin:0 auto;position:relative;">
+        <div class="signup__header">
+          <p class="eyebrow eyebrow--on-dark" style="margin-bottom:18px;">přidej se</p>
+          <h2 class="signup__heading">Přihlas se <em>na lekci</em></h2>
+          <p class="signup__intro">Vyplň pár údajů a&nbsp;ozveme se ti s&nbsp;potvrzením. Platba 300 Kč proběhne na místě před lekcí.</p>
+        </div>
+
+        <sc-if value="{{ showInline }}" hint-placeholder-val="{{ true }}">
+          <div class="form-card">
+            <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
+              <div class="form-card__success" role="status">
+                <p class="form-card__success-icon" aria-hidden="true">✓</p>
+                <h3 class="form-card__success-heading">Díky, jsi v <em>hře!</em></h3>
+                <p class="form-card__success-text">Ozveme se ti na e-mail s&nbsp;potvrzením. Těšíme se na tebe v Pohybovém Ateliéru J7 — nezapomeň dorazit 15 minut předem.</p>
+                <button type="button" onClick="{{ resetForm }}" class="btn btn--outline-wine btn--small" style="margin-top:24px;">přihlásit dalšího</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+              <form onSubmit="{{ onSubmit }}" class="form" novalidate>
+                <div class="form__row">
+                  <label class="form__field">
+                    <span class="form__label">Jméno a&nbsp;příjmení *</span>
+                    <input ref="{{ nameRef }}" type="text" name="name" autocomplete="name" required placeholder="Jana Nováková" class="form__input">
+                  </label>
+                  <label class="form__field">
+                    <span class="form__label">Telefon</span>
+                    <input ref="{{ phoneRef }}" type="tel" name="phone" autocomplete="tel" placeholder="+420 …" class="form__input">
+                  </label>
+                </div>
+                <label class="form__field">
+                  <span class="form__label">E-mail *</span>
+                  <input ref="{{ emailRef }}" type="email" name="email" autocomplete="email" required placeholder="jana@email.cz" class="form__input">
+                </label>
+                <label class="form__field">
+                  <span class="form__label">Poznámka</span>
+                  <textarea ref="{{ noteRef }}" name="note" rows="3" placeholder="Cokoliv nám chceš dát vědět (termín, zkušenosti…)" class="form__textarea"></textarea>
+                </label>
+
+                <label class="form__consent">
+                  <input ref="{{ gdprRef }}" type="checkbox" required aria-required="true" class="form__consent-input">
+                  <span class="form__consent-text"><strong>Souhlas se zpracováním údajů *</strong> — souhlasím se zpracováním osobních údajů (jméno, e-mail, telefon) správcem NŌMA People pro účely registrace a&nbsp;organizační komunikace. Údaje uchováváme max. 6 měsíců od akce a&nbsp;nesdílíme je mimo nezbytné služby. Souhlas lze kdykoli odvolat. Více v&nbsp;<a href="zasady-ochrany-osobnich-udaju.html" target="_blank" rel="noopener">Zásadách ochrany osobních údajů</a>.</span>
+                </label>
+                <label class="form__consent">
+                  <input ref="{{ photoRef }}" type="checkbox" class="form__consent-input">
+                  <span class="form__consent-text"><strong>Souhlas s&nbsp;foto/video</strong> — souhlasím s&nbsp;pořízením a&nbsp;užitím atmosférických foto/video záběrů z akce pro komunikaci NŌMA. Vím, že mohu u vstupu požádat o označení „NO PHOTO" a&nbsp;o odstranění své podoby.</span>
+                </label>
+
+                <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
+                  <div class="form__error" role="alert">{{ formError }}</div>
+                </sc-if>
+
+                <button type="submit" disabled="{{ submitting }}" class="btn btn--solid-wine btn--full">{{ submitLabel }}</button>
+                <p class="form__hint">* povinné pole</p>
+              </form>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showGoogle }}" hint-placeholder-val="{{ false }}">
+          <div class="form-card form-card--center">
+            <p class="form-card__google-icon" aria-hidden="true">↗</p>
+            <h3 class="form-card__google-heading">Přihlášení přes formulář</h3>
+            <p class="form-card__google-text">Klikni na tlačítko a&nbsp;vyplň krátký přihlašovací formulář. Otevře se v novém okně.</p>
+            <a href="{{ googleUrl }}" target="_blank" rel="noopener" class="btn btn--solid-wine">otevřít přihlašovací formulář →</a>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+  </main>
 
   <!-- ===== 10 · FOOTER ===== -->
-  <footer data-screen-label="Footer" data-nav-theme="light" style="position:relative;background:#753B4D;color:#F2E9E1;padding:clamp(80px,10vw,140px) clamp(20px,5vw,72px) 40px;overflow:hidden;">
-    <div style="max-width:1500px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(30px,5vw,70px);padding-top:clamp(20px,3vw,50px);">
+  <footer data-screen-label="Footer" data-nav-theme="light" class="site-footer">
+    <div class="site-footer__grid">
       <div>
-        <p style="font-family:'Roxborough CF','Gloock',serif;font-size:clamp(34px,3.4vw,52px);margin:0 0 14px;line-height:1.1;">Move with us.</p>
-        <p style="font-size:14.5px;line-height:1.7;opacity:0.8;max-width:340px;margin:0;">Kontaktní improvizace Plzeň · letní série lekcí 2026 · move. meet. melt.</p>
+        <p class="footer-brand__tagline">Move with us.</p>
+        <p class="footer-brand__desc">Kontaktní improvizace Plzeň · letní série lekcí 2026 · move. meet. melt.</p>
       </div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <p style="font-weight:600;letter-spacing:0.22em;font-size:12px;text-transform:uppercase;color:#A3D1F0;margin:0 0 6px;">Kde</p>
-        <span style="font-size:15px;opacity:0.85;">Pohybový Ateliér J7</span>
-        <span style="font-size:15px;opacity:0.85;">Jablonského 7, Plzeň</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <p style="font-weight:600;letter-spacing:0.22em;font-size:12px;text-transform:uppercase;color:#A3D1F0;margin:0 0 6px;">Spojení</p>
-        <a href="https://www.instagram.com/maya_cz" target="_blank" rel="noopener" style="color:#F2E9E1;text-decoration:none;font-size:15px;transition:color .3s;" style-hover="color:#A3D1F0;">Instagram @maya_cz ↗</a>
-        <a href="#prihlasit" style="color:#F2E9E1;text-decoration:none;font-size:15px;transition:color .3s;" style-hover="color:#A3D1F0;">Přihlásit se →</a>
-      </div>
+      <nav class="footer-nav" aria-label="Kde nás najdeš">
+        <p class="footer-nav__title">Kde</p>
+        <span class="footer-nav__item">Pohybový Ateliér J7</span>
+        <span class="footer-nav__item">Jablonského 7, Plzeň</span>
+      </nav>
+      <nav class="footer-nav" aria-label="Spojení">
+        <p class="footer-nav__title">Spojení</p>
+        <a href="https://www.instagram.com/maya_cz" target="_blank" rel="noopener" class="footer-nav__link">Instagram @maya_cz ↗</a>
+        <a href="#prihlasit" class="footer-nav__link">Přihlásit se →</a>
+      </nav>
     </div>
-    <p style="text-align:center;font-family:'Roxborough CF','Gloock',serif;font-size:clamp(70px,14vw,230px);line-height:1;margin:clamp(40px,6vw,80px) 0 0;color:rgba(242,233,225,0.14);white-space:nowrap;">NŌMA people</p>
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;margin:clamp(48px,6vw,72px) 0 0;font-size:12px;opacity:0.55;">
+    <p class="site-footer__wordmark" aria-hidden="true">NŌMA people</p>
+    <div class="site-footer__legal">
       <p style="margin:0;">© 2026 NŌMA people · with love &amp; gravity</p>
-      <p style="margin:0;display:flex;gap:18px;flex-wrap:wrap;">
-        <a href="zasady-ochrany-osobnich-udaju.html" style="color:#F2E9E1;text-decoration:none;" style-hover="color:#A3D1F0;">Ochrana osobních údajů</a>
-        <button type="button" onClick="{{ openCookieSettings }}" style="background:none;border:none;padding:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline;">Nastavení cookies</button>
+      <p class="site-footer__legal-links">
+        <a href="zasady-ochrany-osobnich-udaju.html" class="site-footer__legal-link">Ochrana osobních údajů</a>
+        <button type="button" onClick="{{ openCookieSettings }}" class="footer__cookie-btn">Nastavení cookies</button>
       </p>
     </div>
   </footer>
+
+  <!-- ===== MOBILE BOTTOM APP-NAV ===== -->
+  <nav class="bottom-nav" aria-label="Rychlá navigace">
+    <ul class="bottom-nav__list">
+      <li class="bottom-nav__item">
+        <a href="#info" data-spy="info" aria-current="{{ activeSection === 'info' }}" class="bottom-nav__button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="11" x2="12" y2="16"></line><circle cx="12" cy="7.6" r="0.9" fill="currentColor" stroke="none"></circle></svg>
+          <span class="bottom-nav__label">Info</span>
+        </a>
+      </li>
+      <li class="bottom-nav__item">
+        <a href="#faq" data-spy="faq" aria-current="{{ activeSection === 'faq' }}" class="bottom-nav__button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.4a2.5 2.5 0 1 1 3.4 2.3c-.9.4-1.4 1-1.4 1.9v.3"></path><circle cx="12" cy="16.4" r="0.9" fill="currentColor" stroke="none"></circle></svg>
+          <span class="bottom-nav__label">FAQ</span>
+        </a>
+      </li>
+      <li class="bottom-nav__item">
+        <a href="#prihlasit" data-spy="prihlasit" aria-current="{{ activeSection === 'prihlasit' }}" class="bottom-nav__button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.4l2.6 2.6L16 9.4"></path></svg>
+          <span class="bottom-nav__label">Přihlásit</span>
+        </a>
+      </li>
+      <li class="bottom-nav__item">
+        <button type="button" onClick="{{ toggleMobileMore }}" aria-haspopup="true" aria-expanded="{{ mobileMoreOpen }}" aria-controls="bottom-nav-more" class="bottom-nav__button">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></svg>
+          <span class="bottom-nav__label">Více</span>
+        </button>
+        <sc-if value="{{ mobileMoreOpen }}" hint-placeholder-val="{{ false }}">
+          <div id="bottom-nav-more" class="bottom-nav__sheet" role="menu">
+            <a href="#o-ci" role="menuitem" onClick="{{ closeMobileMore }}" class="bottom-nav__sheet-link">Co to je</a>
+            <a href="#lektorka" role="menuitem" onClick="{{ closeMobileMore }}" class="bottom-nav__sheet-link">Lektorka</a>
+            <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+              <a href="admin/" role="menuitem" class="bottom-nav__sheet-link">Administrace</a>
+            </sc-if>
+          </div>
+        </sc-if>
+      </li>
+    </ul>
+  </nav>
 
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;formMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;inline&quot;,&quot;google&quot;],&quot;default&quot;:&quot;inline&quot;,&quot;tsType&quot;:&quot;'inline'|'google'&quot;,&quot;section&quot;:&quot;Formulář&quot;},&quot;cursorTrail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Playfulness&quot;}}">
 class Component extends DCLogic {
-  state = { navTheme: 'light', openFaq: null, formDone: false, formError: '', submitting: false, isAdmin: false };
+  state = {
+    navTheme: 'light',
+    activeSection: '',
+    openFaq: null,
+    formDone: false,
+    formError: '',
+    submitting: false,
+    isAdmin: false,
+    mobileMoreOpen: false,
+  };
 
   nameRef = React.createRef();
   emailRef = React.createRef();
@@ -390,6 +530,9 @@ class Component extends DCLogic {
   noteRef = React.createRef();
   gdprRef = React.createRef();
   photoRef = React.createRef();
+
+  // Section ids the nav (desktop + mobile) can highlight as "active".
+  spyTargets = ['o-ci', 'info', 'lektorka', 'faq', 'prihlasit'];
 
   componentDidMount() {
     this._onScroll = () => {
@@ -400,18 +543,40 @@ class Component extends DCLogic {
         if (r.top <= y && r.bottom > y) theme = el.getAttribute('data-nav-theme');
       });
       if (theme !== this.state.navTheme) this.setState({ navTheme: theme });
+
+      const offset = 120;
+      let current = '';
+      this.spyTargets.forEach((id) => {
+        const sec = document.getElementById(id);
+        if (!sec) return;
+        const r = sec.getBoundingClientRect();
+        if (r.top <= offset && r.bottom > offset) current = id;
+      });
+      if (current !== this.state.activeSection) this.setState({ activeSection: current });
+
       const vh = innerHeight;
       document.querySelectorAll('path[data-draw-once]').forEach((p) => {
         if (p._fired) return;
         const r = p.closest('svg').getBoundingClientRect();
         if (r.top < vh * 0.75) {
           p._fired = true;
-          p.style.animation = 'v3Dash 4s ease-out forwards';
+          p.style.animation = 'line-draw 4s ease-out forwards';
         }
       });
     };
     addEventListener('scroll', this._onScroll, { passive: true });
     this._onScroll();
+
+    // Close the mobile "more" sheet on outside click or Escape.
+    this._onDocClick = (e) => {
+      if (!this.state.mobileMoreOpen) return;
+      if (!e.target.closest('.bottom-nav')) this.setState({ mobileMoreOpen: false });
+    };
+    this._onKeydown = (e) => {
+      if (e.key === 'Escape' && this.state.mobileMoreOpen) this.setState({ mobileMoreOpen: false });
+    };
+    addEventListener('click', this._onDocClick);
+    addEventListener('keydown', this._onKeydown);
 
     // Admin nav link — only shown when a logged-in admin session is detected.
     fetch('api/session.php')
@@ -419,9 +584,12 @@ class Component extends DCLogic {
       .then((d) => this.setState({ isAdmin: !!d.isAdmin }))
       .catch(() => {});
 
-    // cursor trail (V4 signature detail)
-    if ((this.props.cursorTrail ?? true) === false) return;
+    // Cursor trail (signature detail) — skipped entirely for reduced-motion
+    // visitors and when explicitly disabled via the cursorTrail prop.
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || (this.props.cursorTrail ?? true) === false) return;
     const canvas = document.createElement('canvas');
+    canvas.setAttribute('aria-hidden', 'true');
     Object.assign(canvas.style, { position: 'fixed', inset: '0', pointerEvents: 'none', zIndex: '9999' });
     document.body.appendChild(canvas);
     this._trailCanvas = canvas;
@@ -456,6 +624,8 @@ class Component extends DCLogic {
 
   componentWillUnmount() {
     removeEventListener('scroll', this._onScroll);
+    removeEventListener('click', this._onDocClick);
+    removeEventListener('keydown', this._onKeydown);
     cancelAnimationFrame(this._raf);
     removeEventListener('mousemove', this._onMove);
     removeEventListener('resize', this._resizeTrail);
@@ -507,6 +677,9 @@ class Component extends DCLogic {
 
   toggleFaq = (i) => this.setState((s) => ({ openFaq: s.openFaq === i ? null : i }));
 
+  toggleMobileMore = () => this.setState((s) => ({ mobileMoreOpen: !s.mobileMoreOpen }));
+  closeMobileMore = () => this.setState({ mobileMoreOpen: false });
+
   openCookieSettings = () => {
     if (window.nmOpenCookieSettings) window.nmOpenCookieSettings();
   };
@@ -524,41 +697,17 @@ class Component extends DCLogic {
     const faqs = faqData.map((f, i) => {
       const open = this.state.openFaq === i;
       return {
-        q: f.q, a: f.a, n: i + 1,
+        q: f.q, a: f.a, n: i + 1, open,
         toggle: () => this.toggleFaq(i),
-        icon: open ? '–' : '+',
-        rowStyle: {
-          borderBottom: '1.5px solid rgba(117,59,77,0.22)',
-          background: open ? 'rgba(163,209,240,0.16)' : 'transparent',
-          borderRadius: '22px',
-          transition: 'background .35s ease'
-        },
-        glyphStyle: {
-          flex: 'none', fontFamily: "'Roxborough CF','Gloock',serif",
-          fontSize: '28px', lineHeight: 1,
-          color: open ? '#A3D1F0' : '#753B4D',
-          transform: open ? 'rotate(0deg)' : 'rotate(-8deg)',
-          transition: 'transform .35s ease, color .35s ease'
-        },
-        revealStyle: {
-          overflow: 'hidden', maxHeight: open ? '300px' : '0px', opacity: open ? 1 : 0,
-          transition: 'max-height .5s ease, opacity .4s ease'
-        }
+        itemClass: 'faq-item' + (open ? ' faq-item--open' : ''),
       };
     });
 
-    const light = this.state.navTheme === 'light';
-    const serif = "'Roxborough CF','Gloock',serif";
-    const ink = light ? '#F2E9E1' : '#753B4D';
-    const inkInv = light ? '#753B4D' : '#F2E9E1';
-    const logoStyle = { textDecoration: 'none', color: ink, fontFamily: serif, fontSize: '24px', letterSpacing: '0.03em', transition: 'color .4s ease' };
-    const navLinkStyle = { textDecoration: 'none', color: ink, fontSize: '13px', letterSpacing: '0.14em', textTransform: 'lowercase', borderBottom: '1px solid transparent', paddingBottom: '2px', transition: 'border-color .3s, color .4s ease' };
-    const navCtaStyle = { textDecoration: 'none', color: ink, fontSize: '13px', letterSpacing: '0.14em', textTransform: 'lowercase', border: '1px solid ' + ink, borderRadius: '999px', padding: '9px 22px', transition: 'all .3s, color .4s ease, border-color .4s ease' };
+    const dark = this.state.navTheme === 'dark';
 
     return {
-      logoStyle, navLinkStyle, navCtaStyle,
-      navLinkHover: { borderColor: ink },
-      navCtaHover: { background: ink, color: inkInv },
+      headerThemeClass: dark ? 'site-header--theme-dark' : '',
+      activeSection: this.state.activeSection,
       faqs,
       isAdmin: this.state.isAdmin,
       formDone: this.state.formDone,
@@ -566,10 +715,12 @@ class Component extends DCLogic {
       formError: this.state.formError,
       submitting: this.state.submitting,
       submitLabel: this.state.submitting ? 'odesílám…' : 'odeslat přihlášku →',
-      submitOpacity: this.state.submitting ? '0.7' : '1',
       onSubmit: this.onSubmit,
       resetForm: this.resetForm,
       openCookieSettings: this.openCookieSettings,
+      mobileMoreOpen: this.state.mobileMoreOpen,
+      toggleMobileMore: this.toggleMobileMore,
+      closeMobileMore: this.closeMobileMore,
       nameRef: this.nameRef, emailRef: this.emailRef, phoneRef: this.phoneRef,
       noteRef: this.noteRef, gdprRef: this.gdprRef, photoRef: this.photoRef,
       showInline: mode === 'inline',

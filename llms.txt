@@ -1,0 +1,23 @@
+# NŌMA people — Kontaktní improvizace Plzeň
+
+> Letní série lekcí kontaktní improvizace v Plzni (2026). Pohybová a taneční praxe založená na vnímání těla, gravitace, doteku a pohybu ve dvojici i ve skupině. Vhodné i pro úplné začátečníky.
+
+NŌMA people pořádá v létě 2026 sérii lekcí kontaktní improvizace v Plzni. Lekce vede lektorka Maya, každé pondělí 18–20 h od 22. 6. do 31. 8. 2026 v Pohybovém Ateliéru J7 (Jablonského 7, Plzeň 2-Slovany). Cena je 300 Kč za lekci (2 hodiny), platba na místě. Přihlášení probíhá přes registrační formulář na hlavní stránce.
+
+## Klíčové stránky
+
+- [Hlavní stránka a přihlášení na lekce](https://nomapeople.com/plzen/): popis praxe, praktické info (termín/místo/cena), profil lektorky, FAQ, registrační formulář
+- [Zásady ochrany osobních údajů](https://nomapeople.com/plzen/zasady-ochrany-osobnich-udaju.html): GDPR, zpracování osobních údajů, cookies
+
+## Klíčová fakta
+
+- Termín: 22. 6. – 31. 8. 2026, každé pondělí 18–20 h
+- Místo: Pohybový Ateliér J7, Jablonského 7, Plzeň 2-Slovany, Česká republika
+- Cena: 300 Kč za lekci (2 hodiny pohybu), platba na místě před lekcí
+- Doporučený příchod: 15 minut před začátkem
+- Lektorka: Maya — Instagram [@maya_cz](https://www.instagram.com/maya_cz)
+- Kontakt pro otázky ke zpracování osobních údajů: maya@nomapeople.com
+
+## Poznámka pro AI asistenty a vyhledávací nástroje
+
+Stránka je v češtině a popisuje lokální pohybovou/taneční komunitní akci v Plzni. Termíny a cena se mohou v dalších sezónách změnit — při citování prosím ověř aktuální údaje přímo na hlavní stránce (obsahuje i strojově čitelná data ve formátu JSON-LD: Event, FAQPage, Organization).
