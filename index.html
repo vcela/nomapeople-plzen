@@ -152,7 +152,7 @@
 
   <!-- ===== HEADER ===== -->
   <header class="site-header {{ headerThemeClass }}">
-    <a href="#top" class="site-header__brand">NŌMA<span class="site-header__brand-name">people</span><span class="site-header__brand-badge">Plzeň</span></a>
+    <a href="#top" class="site-header__brand"><span class="site-header__brand-title">NŌMA</span><span class="site-header__brand-name">people</span><span class="site-header__brand-badge">Plzeň</span></a>
     <div class="site-header__nav">
       <nav class="nav-links" aria-label="Hlavní navigace">
         <a href="#o-ci" class="nav-links__link" data-spy="o-ci" aria-current="{{ activeSection === 'o-ci' }}">co to je</a>
@@ -383,8 +383,8 @@
             <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
               <div class="form-card__success" role="status">
                 <p class="form-card__success-icon" aria-hidden="true">✓</p>
-                <h3 class="form-card__success-heading">Díky, jsi v <em>hře!</em></h3>
-                <p class="form-card__success-text">Ozveme se ti na e-mail s&nbsp;potvrzením. Těšíme se na tebe v Pohybovém Ateliéru J7 — nezapomeň dorazit 15 minut předem.</p>
+                <h3 class="form-card__success-heading">Paráda, tvoje přihlášení už je u nás! ✨</h3>
+                <p class="form-card__success-text">Mrkni na e-mail s potvrzením a všemi detaily.<br><br> Těšíme se na tebe v Pohybovém Ateliéru J7.<br><br> Doraz prosím o 15 minut dřív, ať máš čas se v klidu naladit, převléknout a přivítat :)</p>
                 <button type="button" onClick="{{ resetForm }}" class="btn btn--outline-wine btn--small" style="margin-top:24px;">přihlásit dalšího</button>
               </div>
             </sc-if>

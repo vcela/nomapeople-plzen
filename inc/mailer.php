@@ -75,7 +75,7 @@ function send_registrant_confirmation(array $reg): void {
 
         $name = htmlspecialchars($reg['name'], ENT_QUOTES, 'UTF-8');
         $html = <<<HTML
-<p>Ahoj {$name},</p>
+<p>Ahoj,</p>
 <p>mám velkou radost, že ses přihlásil/a na letní sérii lekcí kontaktní improvizace v Plzni. Děkuji za důvěru a těším se na společné objevování pohybu, naslouchání, hravosti a kontaktu.</p>
 <p><strong>Praktické informace</strong></p>
 <p>📅 <strong>Kdy:</strong> 22. 6. – 31. 8. 2026, každé pondělí 18:00–20:00<br>
