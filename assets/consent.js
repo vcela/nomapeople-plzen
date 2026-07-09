@@ -58,29 +58,49 @@
     if (el) el.remove();
   }
 
+  // Built with classList (assets/style.css) rather than inline styles, so the
+  // banner always matches the page's current design tokens.
   function renderBanner() {
     if (document.getElementById('nm-cookie-banner')) return;
+
     var el = document.createElement('div');
     el.id = 'nm-cookie-banner';
+    el.className = 'cookie-banner';
     el.setAttribute('role', 'dialog');
     el.setAttribute('aria-label', 'Nastavení cookies');
-    el.style.cssText = 'position:fixed; left:0; right:0; bottom:0; z-index:9999; background:#2a2320; color:#f4ecc6; padding:18px 24px; display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; font-family:"Public Sans",sans-serif; box-shadow:0 -18px 38px -24px rgba(0,0,0,0.6);';
-    el.innerHTML =
-      '<p style="margin:0; flex:1 1 320px; font-size:14px; line-height:1.5; max-width:60ch;">' +
-      'Používáme cookies pro měření návštěvnosti (Google Analytics) a případně cílenou reklamu (Meta Pixel). ' +
-      'Podrobnosti najdeš v <a href="zasady-ochrany-osobnich-udaju.html" style="color:#8fb6c7; text-decoration:underline;">Zásadách ochrany osobních údajů</a>.' +
-      '</p>' +
-      '<div style="display:flex; gap:10px; flex:none;">' +
-      '<button type="button" id="nm-cookie-reject" style="background:transparent; border:1.5px solid #f4ecc6; color:#f4ecc6; font-weight:700; font-size:14px; padding:11px 20px; border-radius:999px; cursor:pointer;">Odmítnout</button>' +
-      '<button type="button" id="nm-cookie-accept" style="background:#884858; border:none; color:#f4ecc6; font-weight:700; font-size:14px; padding:11px 20px; border-radius:999px; cursor:pointer;">Přijmout vše</button>' +
-      '</div>';
+
+    var text = document.createElement('p');
+    text.className = 'cookie-banner__text';
+    text.innerHTML = 'Používáme cookies pro měření návštěvnosti (Google Analytics) a případně cílenou reklamu (Meta Pixel). ' +
+      'Podrobnosti najdeš v <a href="zasady-ochrany-osobnich-udaju.html">Zásadách ochrany osobních údajů</a>.';
+
+    var actions = document.createElement('div');
+    actions.className = 'cookie-banner__actions';
+
+    var acceptBtn = document.createElement('button');
+    acceptBtn.type = 'button';
+    acceptBtn.id = 'nm-cookie-accept';
+    acceptBtn.className = 'cookie-banner__btn cookie-banner__btn--accept';
+    acceptBtn.textContent = 'Jasně!';
+
+    var rejectBtn = document.createElement('button');
+    rejectBtn.type = 'button';
+    rejectBtn.id = 'nm-cookie-reject';
+    rejectBtn.className = 'cookie-banner__btn cookie-banner__btn--reject';
+    rejectBtn.textContent = 'Ne, díky';
+
+    actions.appendChild(acceptBtn);
+    actions.appendChild(rejectBtn);
+    el.appendChild(text);
+    el.appendChild(actions);
     document.body.appendChild(el);
-    document.getElementById('nm-cookie-accept').addEventListener('click', function () {
+
+    acceptBtn.addEventListener('click', function () {
       setConsent('accepted');
       removeBanner();
       activate();
     });
-    document.getElementById('nm-cookie-reject').addEventListener('click', function () {
+    rejectBtn.addEventListener('click', function () {
       setConsent('rejected');
       removeBanner();
     });
