@@ -246,7 +246,6 @@ textarea:focus-visible {
   color: inherit;
   font-size: 13px;
   letter-spacing: .14em;
-  text-transform: lowercase;
   border-bottom: 1px solid transparent;
   padding-bottom: 2px;
   transition: border-color .3s, color .4s ease;
@@ -361,7 +360,7 @@ textarea:focus-visible {
 }
 .section--wide { max-width: 1500px; margin: 0 auto; overflow: hidden; }
 .section--narrow { max-width: 980px; margin: 0 auto; overflow: hidden; }
-.section--center { text-align: center; overflow: hidden; }
+.section--center { text-align: center; overflow: visible; }
 .section--band {
   padding: clamp(120px, 15vw, 220px) var(--page-pad) clamp(130px, 16vw, 220px);
   overflow: hidden;
@@ -415,7 +414,7 @@ textarea:focus-visible {
   animation: blob-breathe 13s ease-in-out infinite;
   pointer-events: none;
   overflow: visible;
-  z-index: 0;
+  z-index: 1;
 }
 
 .decor-dancer {
@@ -533,7 +532,6 @@ textarea:focus-visible {
   max-width: 26em;
   text-wrap: balance;
 }
-.audience__body em { color: var(--color-cream); }
 
 /* ==========================================================================
    Practical info
@@ -659,10 +657,10 @@ textarea:focus-visible {
   padding: clamp(20px, 3vw, 40px) 0 clamp(40px, 5vw, 70px);
 }
 .teacher__portrait { position: relative; max-width: 460px; }
-.teacher__portrait-image { width: 100%; height: auto; display: block; border-radius: var(--radius-card); }
+.teacher__portrait-image { width: 100%; height: auto; display: block; border-radius: var(--radius-card); aspect-ratio: 4 / 5; object-fit: cover;}
 .teacher__portrait-caption {
   position: absolute;
-  left: clamp(-24px, -3vw, -10px);
+  left: clamp(-64px, -8vw, -10px);
   bottom: clamp(-38px, -4vw, -20px);
   margin: 0;
   font-family: var(--font-display);
@@ -697,6 +695,7 @@ textarea:focus-visible {
   color: var(--color-wine);
   text-wrap: balance;
 }
+.about-project__heading a {text-decoration: none;}
 .about-project__heading strong {
   display: block;
   font-weight: 400;
