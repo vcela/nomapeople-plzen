@@ -288,9 +288,17 @@ textarea:focus-visible {
   .hamburger-btn { display: flex; align-items: center; justify-content: center; }
 }
 .hamburger-btn svg { width: 26px; height: 26px; }
+.hamburger-btn svg line {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .3s var(--ease-standard), opacity .2s var(--ease-standard);
+}
 /* Menu panel behind it is always wine — force cream so the icon stays
    visible even when the header's scroll-spy theme would make it wine too. */
 .hamburger-btn[aria-expanded="true"] { color: var(--color-cream); }
+.hamburger-btn[aria-expanded="true"] svg line:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.hamburger-btn[aria-expanded="true"] svg line:nth-child(2) { opacity: 0; }
+.hamburger-btn[aria-expanded="true"] svg line:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
 .mobile-menu {
   position: fixed;
