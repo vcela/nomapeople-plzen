@@ -15,6 +15,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= esc($pageTitle) ?> · Administrace · NŌMA people</title>
+<script src="assets/confirm.js" defer></script>
 <style>
   *{ box-sizing:border-box; }
   body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#ece5d8; color:#2a2320; }
@@ -31,19 +32,31 @@
   .admin-main{ max-width:1080px; margin:0 auto; padding:32px 24px 64px; }
   h1{ font-size:26px; font-weight:700; color:#884858; margin:0 0 20px; }
   .card{ background:#f6efde; border:1px solid rgba(136,72,88,0.16); border-radius:16px; padding:24px; margin-bottom:24px; }
-  table{ width:100%; border-collapse:collapse; font-size:14px; }
+  table{ width:100%; border-collapse:separate; border-spacing:0; font-size:14px; }
   th,td{ text-align:left; padding:10px 12px; border-bottom:1px solid rgba(136,72,88,0.14); vertical-align:top; }
   th{ font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:#6f3a47; }
   .badge-yes{ color:#1f7a4d; font-weight:700; }
   .badge-no{ color:#9a2b2b; font-weight:700; }
-  .group-card{ background:#f6efde; border:1px solid rgba(136,72,88,0.16); border-radius:16px; margin-bottom:28px; overflow:hidden; }
-  .group-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 20px; background:rgba(136,72,88,0.08); border-bottom:2px dashed rgba(136,72,88,0.35); font-weight:700; color:#884858; }
+  .group-card{ display:block; background:#f6efde; border:1px solid rgba(136,72,88,0.16); border-radius:16px; margin-bottom:28px; overflow:hidden; }
+  .group-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 20px; background:rgba(136,72,88,0.08); border-bottom:2px dashed rgba(136,72,88,0.35); font-weight:700; color:#884858; cursor:pointer; list-style:none; }
+  .group-header::-webkit-details-marker{ display:none; }
+  .group-header .group-title{ display:flex; align-items:center; gap:10px; }
+  .group-header .chevron{ display:inline-block; transition:transform .15s ease; }
+  details[open] > .group-header .chevron{ transform:rotate(90deg); }
   .group-header .group-count{ font-size:12px; font-weight:700; background:#884858; color:#f4ecc6; padding:4px 12px; border-radius:999px; white-space:nowrap; }
+  .table-scroll{ overflow-x:auto; }
   .group-card table{ margin:0; }
   .group-card tr:last-child td{ border-bottom:none; }
   tr.row-deleted{ opacity:0.5; text-decoration:line-through; }
-  .row-action-btn{ font:inherit; font-size:12px; background:transparent; border:1px solid rgba(136,72,88,0.4); color:#884858; padding:6px 12px; border-radius:8px; cursor:pointer; white-space:nowrap; }
+  .col-sticky-left, .col-sticky-right{ position:sticky; background:#f6efde; z-index:1; }
+  thead .col-sticky-left, thead .col-sticky-right{ background:#f6efde; z-index:2; }
+  .col-sticky-left{ left:0; box-shadow:2px 0 4px -2px rgba(0,0,0,0.15); }
+  .col-sticky-right{ right:0; box-shadow:-2px 0 4px -2px rgba(0,0,0,0.15); }
+  .row-action-btn{ font:inherit; font-size:12px; background:transparent; border:1px solid rgba(136,72,88,0.4); color:#884858; padding:6px 12px; border-radius:8px; cursor:pointer; white-space:nowrap; margin-left:6px; }
+  .row-action-btn:first-child{ margin-left:0; }
   .row-action-btn:hover{ background:rgba(136,72,88,0.1); }
+  .row-action-danger{ border-color:rgba(154,43,43,0.4); color:#9a2b2b; padding:6px 10px; }
+  .row-action-danger:hover{ background:rgba(154,43,43,0.1); }
   label{ display:block; font-size:13px; font-weight:700; color:#884858; margin-bottom:6px; }
   input[type=email], input[type=password], input[type=text]{ width:100%; max-width:360px; padding:10px 12px; border:1.5px solid rgba(136,72,88,0.25); border-radius:10px; font-size:15px; margin-bottom:16px; }
   button[type=submit], .btn{ background:#884858; color:#f4ecc6; font-weight:700; border:none; padding:11px 20px; border-radius:999px; cursor:pointer; font-size:14px; }

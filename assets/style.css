@@ -287,7 +287,7 @@ textarea:focus-visible {
 @media (max-width: 820px) {
   .hamburger-btn { display: flex; align-items: center; justify-content: center; }
 }
-.hamburger-btn svg { width: 26px; height: 26px; }
+.hamburger-btn svg { width: 36px; height: 36px; }
 .hamburger-btn svg line {
   transform-box: fill-box;
   transform-origin: center;
@@ -530,6 +530,13 @@ textarea:focus-visible {
   margin: 0 0 20px;
   opacity: .9;
 }
+
+.hero__eyebrow {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
 .hero__title {
   font-family: var(--font-display);
   font-weight: 400;
@@ -545,6 +552,15 @@ textarea:focus-visible {
   color: var(--color-blue);
   font-size: clamp(20px, 2.4vw, 32px);
   margin: 18px 0 0;
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+.hero__tagline--mobile {
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
 }
 .hero__actions {
   display: flex; flex-wrap: wrap; gap: 12px;
@@ -726,6 +742,10 @@ textarea:focus-visible {
 .teacher__portrait-col {
   position: relative;
   padding: clamp(20px, 3vw, 40px) 0 clamp(40px, 5vw, 70px);
+
+  @media (max-width: 767px) {
+    padding-top: 0;
+  }
 }
 .teacher__portrait { position: relative; max-width: 460px; }
 .teacher__portrait-image { width: 100%; height: auto; display: block; border-radius: var(--radius-card); aspect-ratio: 4 / 5; object-fit: cover;}
@@ -1174,5 +1194,11 @@ textarea:focus-visible {
 @media (max-width: 480px) {
   .teacher__portrait-caption { 
     right: 20px;
+  }
+}
+
+.teacher-wave {
+  @media (max-width: 767px) {
+    display: none;
   }
 }
