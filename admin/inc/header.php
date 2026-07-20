@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= esc($pageTitle) ?> · Administrace · NŌMA people</title>
-<script src="assets/confirm.js" defer></script>
+<script src="assets/admin.js" defer></script>
 <style>
   *{ box-sizing:border-box; }
   body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#ece5d8; color:#2a2320; }
@@ -52,8 +52,9 @@
   thead .col-sticky-left, thead .col-sticky-right{ background:#f6efde; z-index:2; }
   .col-sticky-left{ left:0; box-shadow:2px 0 4px -2px rgba(0,0,0,0.15); }
   .col-sticky-right{ right:0; box-shadow:-2px 0 4px -2px rgba(0,0,0,0.15); }
-  .row-action-btn{ font:inherit; font-size:12px; background:transparent; border:1px solid rgba(136,72,88,0.4); color:#884858; padding:6px 12px; border-radius:8px; cursor:pointer; white-space:nowrap; margin-left:6px; }
-  .row-action-btn:first-child{ margin-left:0; }
+  .row-actions{ display:flex; align-items:center; gap:6px; }
+  .row-action-form{ margin:0; }
+  .row-action-btn{ font:inherit; font-size:12px; background:transparent; border:1px solid rgba(136,72,88,0.4); color:#884858; padding:6px 12px; border-radius:8px; cursor:pointer; white-space:nowrap; }
   .row-action-btn:hover{ background:rgba(136,72,88,0.1); }
   .row-action-danger{ border-color:rgba(154,43,43,0.4); color:#9a2b2b; padding:6px 10px; }
   .row-action-danger:hover{ background:rgba(154,43,43,0.1); }
