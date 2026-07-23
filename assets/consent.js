@@ -8,7 +8,7 @@
 (function () {
   var STORAGE_KEY = 'nm_cookie_consent'; // 'accepted' | 'rejected'
   var GA_MEASUREMENT_ID = 'G-XZS41C1ELT';
-  var META_PIXEL_ID = ''; // TODO: set once a Meta Pixel is created, e.g. '1234567890123456'
+  var META_PIXEL_ID = '1687890829112006';
 
   function getConsent() {
     try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
@@ -46,6 +46,9 @@
     /* eslint-enable */
     window.fbq('init', META_PIXEL_ID);
     window.fbq('track', 'PageView');
+    // Conversion event on the thank-you page. Lives here (not inline in
+    // dekujeme.html) because the CSP has no 'unsafe-inline' for scripts.
+    if (/dekujeme/.test(location.pathname)) window.fbq('track', 'Lead');
   }
 
   function activate() {

@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/gloock-400-latin-ext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-400-latin-ext.woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="shortcut icon" href="assets/favicon.svg">
 <meta property="og:locale" content="cs_CZ">
@@ -394,15 +394,6 @@
 
         <sc-if value="{{ showInline }}" hint-placeholder-val="{{ true }}">
           <div class="form-card">
-            <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
-              <div class="form-card__success" role="status">
-                <p class="form-card__success-icon" aria-hidden="true">✓</p>
-                <h3 class="form-card__success-heading">Paráda, tvoje přihlášení už je u nás! ✨</h3>
-                <p class="form-card__success-text">Mrkni na e-mail s potvrzením a&nbsp;všemi detaily.<br><br> Těšíme se na tebe v Pohybovém Ateliéru J7.<br><br> Doraz prosím o 15 minut dřív, ať máš čas se v klidu naladit, převléknout a&nbsp;přivítat :)</p>
-                <button type="button" onClick="{{ resetForm }}" class="btn btn--outline-wine btn--small" style="margin-top:24px;">přihlásit dalšího</button>
-              </div>
-            </sc-if>
-            <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
               <form onSubmit="{{ onSubmit }}" class="form" novalidate>
                 <div class="form__row">
                   <label class="form__field">
@@ -439,7 +430,6 @@
                 <button type="submit" disabled="{{ submitting }}" class="btn btn--solid-wine btn--full">{{ submitLabel }}</button>
                 <p class="form__hint">* povinné pole</p>
               </form>
-            </sc-if>
           </div>
         </sc-if>
 
@@ -494,7 +484,6 @@ class Component extends DCLogic {
     navTheme: 'light',
     activeSection: '',
     openFaq: null,
-    formDone: false,
     formError: '',
     submitting: false,
     isAdmin: false,
@@ -641,15 +630,9 @@ class Component extends DCLogic {
         if (typeof window.gtag === 'function') {
           window.gtag('event', 'generate_lead', { form_name: 'prihlaska_lekce' });
         }
-        this.setState({ formDone: true, submitting: false });
+        window.location.href = 'dekujeme.html';
       })
       .catch((err) => this.setState({ formError: err.message, submitting: false }));
-  };
-
-  resetForm = () => {
-    this.setState({ formDone: false, formError: '' });
-    [this.nameRef, this.emailRef, this.phoneRef, this.noteRef].forEach((r) => { if (r.current) r.current.value = ''; });
-    [this.gdprRef, this.photoRef].forEach((r) => { if (r.current) r.current.checked = false; });
   };
 
   toggleFaq = (i) => this.setState((s) => ({ openFaq: s.openFaq === i ? null : i }));
@@ -687,13 +670,10 @@ class Component extends DCLogic {
       activeSection: this.state.activeSection,
       faqs,
       isAdmin: this.state.isAdmin,
-      formDone: this.state.formDone,
-      formOpen: !this.state.formDone,
       formError: this.state.formError,
       submitting: this.state.submitting,
       submitLabel: this.state.submitting ? 'odesílám…' : 'odeslat přihlášku →',
       onSubmit: this.onSubmit,
-      resetForm: this.resetForm,
       openCookieSettings: this.openCookieSettings,
       mobileMenuOpen: this.state.mobileMenuOpen,
       toggleMobileMenu: this.toggleMobileMenu,
