@@ -31,20 +31,16 @@
     gtag('config', GA_MEASUREMENT_ID);
   }
 
-  // Load the pixel base code + init so Meta can detect the installation
-  // (Pixel Helper, Events Manager verification — which crawl the page WITHOUT
-  // accepting the banner). Verified empirically: fbq('init') pings
-  // /signals/config/<id> — THIS is what makes Meta detect the pixel — while
-  // setting no _fbp cookie and firing no tracking event on its own. So this is
-  // safe to run even for undecided visitors; actual tracking is gated on
-  // grantMetaPixel() below, which is the only place track() is ever called.
-  //
-  // We deliberately do NOT use Meta's fbq('consent','revoke'/'grant') API:
-  // revoke-before-init also suppresses the config ping (killing detection),
-  // and a revoke→grant sequence queued before fbevents.js loads was observed
-  // to leave the pixel permanently holding events. Gating on whether we call
-  // track() is simpler and behaves predictably.
-  function loadMetaPixelBase() {
+  // Meta Pixel. Loads and fires PageView on EVERY page load, independent of the
+  // cookie decision — a deliberate choice by the site owner so Meta reliably
+  // detects the pixel as active (its automatic detector and Pixel Helper crawl
+  // the page without accepting the banner; a consent-gated pixel therefore
+  // never reaches Meta and shows as "no activity"). Trade-off: this tracks and
+  // sets the _fbp cookie before consent, which is a GDPR grey area for a
+  // marketing pixel. Google Analytics stays gated behind consent (see init()).
+  // ponytail: fires unconditionally incl. after "Ne, díky"; to exempt explicit
+  // rejecters, guard the call in init() with getConsent() !== 'rejected'.
+  function loadMetaPixel() {
     if (!META_PIXEL_ID || window.__nmPixelLoaded) return;
     window.__nmPixelLoaded = true;
     /* eslint-disable */
@@ -57,23 +53,11 @@
       s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     /* eslint-enable */
-    window.fbq('init', META_PIXEL_ID); // config ping → Meta detects install (no cookie, no event)
-  }
-
-  // Fire the tracking events. Only ever called after the visitor has accepted
-  // (or previously accepted) cookies — this is the consent gate.
-  function grantMetaPixel() {
-    loadMetaPixelBase();
-    if (!window.fbq) return;
+    window.fbq('init', META_PIXEL_ID);
     window.fbq('track', 'PageView');
     // Conversion event on the thank-you page. Lives here (not inline in
     // dekujeme.html) because the CSP has no 'unsafe-inline' for scripts.
     if (/dekujeme/.test(location.pathname)) window.fbq('track', 'Lead');
-  }
-
-  function activate() {
-    loadGoogleAnalytics();
-    grantMetaPixel();
   }
 
   function removeBanner() {
@@ -121,7 +105,7 @@
     acceptBtn.addEventListener('click', function () {
       setConsent('accepted');
       removeBanner();
-      activate();
+      loadGoogleAnalytics(); // pixel already loaded on page init, GA is what consent unlocks
     });
     rejectBtn.addEventListener('click', function () {
       setConsent('rejected');
@@ -130,14 +114,11 @@
   }
 
   function init() {
+    loadMetaPixel(); // fires on every load regardless of consent (see loadMetaPixel)
     var consent = getConsent();
     if (consent === 'accepted') {
-      activate();
+      loadGoogleAnalytics();
     } else if (consent !== 'rejected') {
-      // Undecided: show the banner, and load the pixel in its revoked state so
-      // Meta can detect the installation. No events fire until the visitor
-      // accepts. GA stays fully gated (no Google consent-mode equivalent here).
-      loadMetaPixelBase();
       renderBanner();
     }
   }
