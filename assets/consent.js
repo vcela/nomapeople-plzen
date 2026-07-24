@@ -31,7 +31,20 @@
     gtag('config', GA_MEASUREMENT_ID);
   }
 
-  function loadMetaPixel() {
+  // Load the pixel base code + init so Meta can detect the installation
+  // (Pixel Helper, Events Manager verification — which crawl the page WITHOUT
+  // accepting the banner). Verified empirically: fbq('init') pings
+  // /signals/config/<id> — THIS is what makes Meta detect the pixel — while
+  // setting no _fbp cookie and firing no tracking event on its own. So this is
+  // safe to run even for undecided visitors; actual tracking is gated on
+  // grantMetaPixel() below, which is the only place track() is ever called.
+  //
+  // We deliberately do NOT use Meta's fbq('consent','revoke'/'grant') API:
+  // revoke-before-init also suppresses the config ping (killing detection),
+  // and a revoke→grant sequence queued before fbevents.js loads was observed
+  // to leave the pixel permanently holding events. Gating on whether we call
+  // track() is simpler and behaves predictably.
+  function loadMetaPixelBase() {
     if (!META_PIXEL_ID || window.__nmPixelLoaded) return;
     window.__nmPixelLoaded = true;
     /* eslint-disable */
@@ -44,7 +57,14 @@
       s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     /* eslint-enable */
-    window.fbq('init', META_PIXEL_ID);
+    window.fbq('init', META_PIXEL_ID); // config ping → Meta detects install (no cookie, no event)
+  }
+
+  // Fire the tracking events. Only ever called after the visitor has accepted
+  // (or previously accepted) cookies — this is the consent gate.
+  function grantMetaPixel() {
+    loadMetaPixelBase();
+    if (!window.fbq) return;
     window.fbq('track', 'PageView');
     // Conversion event on the thank-you page. Lives here (not inline in
     // dekujeme.html) because the CSP has no 'unsafe-inline' for scripts.
@@ -53,7 +73,7 @@
 
   function activate() {
     loadGoogleAnalytics();
-    loadMetaPixel();
+    grantMetaPixel();
   }
 
   function removeBanner() {
@@ -74,7 +94,7 @@
 
     var text = document.createElement('p');
     text.className = 'cookie-banner__text';
-    text.innerHTML = 'Používáme cookies pro měření návštěvnosti (Google Analytics) a případně cílenou reklamu (Meta Pixel). ' +
+    text.innerHTML = 'Používáme cookies pro lepší fungování webu, měření návštěvnosti a případně cílení reklamy. ' +
       'Podrobnosti najdeš v <a href="zasady-ochrany-osobnich-udaju.html">Zásadách ochrany osobních údajů</a>.';
 
     var actions = document.createElement('div');
@@ -114,6 +134,10 @@
     if (consent === 'accepted') {
       activate();
     } else if (consent !== 'rejected') {
+      // Undecided: show the banner, and load the pixel in its revoked state so
+      // Meta can detect the installation. No events fire until the visitor
+      // accepts. GA stays fully gated (no Google consent-mode equivalent here).
+      loadMetaPixelBase();
       renderBanner();
     }
   }
